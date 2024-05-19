@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonvino Main Page</title>
+    <link rel="stylesheet" href="{% static '/styles/index.css' %}">
+</head>
+<body>
+    <header>
+        <div class="titles">
+            <h1>Bonvino</h1>
+            <h3>Los mejores vinos</h3>
+        </div>
+    </header>
+    <main>
+        <div class="welcoming">
+            <h1>Bienvenido!</h1>
+        </div>
+        <section>
+            <a href="/actualizaciones">Importar Actualizacion de Vinos</a>
+        </section>
+    </main>
+</body>
+</html>

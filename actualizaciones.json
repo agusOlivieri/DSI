@@ -1,8 +1,16 @@
 {
     "bodega": {
+        "id": 1,
         "nombre": "bodega1",
         "vino": {
-            "nombre": ""
+            "nombre": "vinoNuevo",
+            "aniada": "aniada nueva",
+            "ImagenEtiqueta": "imagenNueva",
+            "NotaDeCata": "Nota de cada nueva",
+            "precioARS": 5000,
+            "bodega": 1,
+            "maridaje": 2,
+            "varietal": 3
         }
     }
 }
