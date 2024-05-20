@@ -1,16 +1,39 @@
-<h1>Lista de bodegas para actualizar</h1>
+{% load static %}
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Bodega</th>
-        <th>Elegir Bodega</th>
-    </tr>
-    {% for bodega in json.bodegas %}
-    <tr>
-        <td>{{ bodega.id }}</td>
-        <td>{{ bodega.nombre }}<td>
-        <td><button class="btn" type="button"><a href="/actualizar/actualizar_vino/{{ bodega.id }}">Seleccionar</a></button></td>
-    </tr>
-    {% endfor %}
-</table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizaciones</title>
+    <link rel="stylesheet" href="{% static '/styles/actualizaciones.css' %}">
+</head>
+<body>
+    <main>
+        <h1 class="titles">Lista de bodegas para actualizar</h1>
+        
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Bodega</th>
+                    <th>Elegir Bodega</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for bodega in json.bodegas %}
+                <tr>
+                    <td>{{ bodega.id }}</td>
+                    <td>{{ bodega.nombre }}</td>
+                    <td>
+                        <button class="btn" type="button">
+                            <a href="/actualizar/actualizar_vino/{{ bodega.id }}">Seleccionar</a>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

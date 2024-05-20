@@ -14,8 +14,6 @@ def verActualizaciones(request):
         'json': data
     })
 
-
-
 def actualizarVino(request, id):
     with open("actualizaciones.json") as file:
         data = json.load(file)
@@ -56,38 +54,8 @@ def actualizarVino(request, id):
             listaVinos.append(vino)
 
     bodega = Bodega.objects.get(id=id)
+    print("")
     return render(request, 'lista_de_vinos.html', {
         "vinos": listaVinos,
         "bodega": bodega
     })
-
-# def crearVino(request, id):
-#     with open("actualizaciones.json") as file:
-#         data = json.load(file)
-
-#     actualizaciones = data["bodegas"]
-#     listaVinos = []
-#     for a in actualizaciones:
-#         if (a["id"] == id and a["crear"] == True):
-
-#             maridajeId = a["vino"]["maridaje"]
-#             varietalId = a["vino"]["varietal"]
-#             m = Maridaje.objects.get(id=maridajeId)
-#             v = Varietal.objects.get(id=varietalId)
-#             b = Bodega.objects.get(id=id)
-            
-#             aniada = a["vino"]["aniada"]
-#             imagen = a["vino"]["ImagenEtiqueta"]
-#             nota = a["vino"]["NotaDeCata"]
-#             precio = a["vino"]["precioARS"]
-#             nom = a["vino"]["nombre"]
-
-#             vino = Vino(añada=aniada, ImagenEstiqueta=imagen, nombre=nom, notaDeCata=nota, precioARS=precio, maridaje=m, varietal=v, bodega=b)
-#             vino.save()
-#             listaVinos.append(vino)
-
-#     bodega = Bodega.objects.get(id=id)
-#     return render(request, 'lista_de_vinos.html', {
-#         "vinos": listaVinos,
-#         "bodega": bodega
-#     })

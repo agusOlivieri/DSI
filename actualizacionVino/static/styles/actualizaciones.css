@@ -1,0 +1,92 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: rgb(42, 33, 62);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+main {
+    max-width: 800px;
+    margin: auto;
+}
+
+.titles {
+    color: rgb(255, 255, 255);
+    font-size: 2.2em;
+    text-align: center;
+    margin: 40px;
+}
+
+.tabla {
+    font-size: 17px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    border: 2px solid white;
+    width: 100%
+}
+
+thead {
+    background: rgb(69, 57, 94);
+}
+
+th {
+    padding: 20px 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 15px;
+    border-bottom: solid 1px white;
+    text-align: center;
+
+}
+
+.btn {
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+.btn a {
+    text-decoration: none;
+    color: rgb(42, 33, 62);
+    font-size: 1.1em;
+}
+
+.btn a:hover {
+    font-size: 1.2em;
+}
+
+.btn:active {
+    scale: 0.9;
+}
+
+tbody tr:hover {
+    background-color: rgb(118, 101, 154);
+}
+
+
+div {
+    margin-top: 50px;
+}
+
+.btn-vuelta {
+    margin-top: 100px;
+    border-radius: 10px;
+    border: 2px solid rgb(123, 77, 115);
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    font-size: 1.1em;
+}
+
+.btn-vuelta:hover {
+    background: white;
+    color:rgb(42, 33, 62)
+}
