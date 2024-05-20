@@ -8,11 +8,11 @@
         <th>Bodega</th>
         <th>Elegir Bodega</th>
     </tr>
+    {% for bodega in json.bodegas %}
     <tr>
-        {% for bodega in json.bodegas %}
         <td>{{ bodega.id }}</td>
         <td>{{ bodega.nombre }}<td>
-        <td><button class="btn" type="button"><a href="/actualizar/crear_vino">Seleccionar</a></button></td>
-        {% endfor %}
+        <td><button class="btn" type="button"><a href="/actualizar/crear_vino/{{ bodega.id }}">Seleccionar</a></button></td>
     </tr>
+    {% endfor %}
 </table>

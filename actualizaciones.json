@@ -27,6 +27,20 @@
                 "maridaje": 1,
                 "varietal": 2
             }
+        },
+        {
+            "id": 2,
+            "nombre": "bodega2",
+            "vino": {
+                "nombre": "vinoNuevo2",
+                "aniada": "aniada nueva2",
+                "ImagenEtiqueta": "imagenNueva2",
+                "NotaDeCata": "Nota de cada nueva2",
+                "precioARS": 1000,
+                "bodega": 1,
+                "maridaje": 1,
+                "varietal": 2
+            }
         }
     ]
 }
