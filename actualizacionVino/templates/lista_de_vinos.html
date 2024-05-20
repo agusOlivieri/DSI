@@ -6,6 +6,7 @@
         <th>Vino</th>
         <th>Precio</th>
         <th>Nota de Cata</th>
+        <th>Imagen De Etiqueta</th>
         <th>Bodega</th>
     </tr>
     {% for vino in vinos %}
@@ -14,6 +15,7 @@
         <td>{{ vino.nombre }}<td>
         <td>{{ vino.precioARS }}<td>
         <td>{{ vino.notaDeCata }}<td>
+        <td>{{ vino.ImagenEstiqueta }}<td>
         <td>{{ bodega }}<td>
     </tr>
     {% endfor %}

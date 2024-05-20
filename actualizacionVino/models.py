@@ -20,6 +20,13 @@ class Bodega(models.Model):
     def __str__(self):
         return self.nombre
 
+class TipoUva(models.Model):
+    descripcion = models.TextField()
+    nombre = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.nombre
+
 class Maridaje(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
@@ -31,6 +38,7 @@ class Varietal(models.Model):
     nombre = models.CharField(max_length=30)
     descrip = models.TextField()
     porcComposicion = models.IntegerField()
+    tipoVino = models.ForeignKey(TipoUva, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre
