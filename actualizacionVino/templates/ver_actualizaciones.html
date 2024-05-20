@@ -12,7 +12,12 @@
     <tr>
         <td>{{ bodega.id }}</td>
         <td>{{ bodega.nombre }}<td>
+        <!-- {% if bodega.crear == True %}
         <td><button class="btn" type="button"><a href="/actualizar/crear_vino/{{ bodega.id }}">Seleccionar</a></button></td>
+        {% else %}
+        <td><button class="btn" type="button"><a href="/actualizar/actualizar_vino/{{ bodega.id }}">Seleccionar</a></button></td>
+        {% endif %} -->
+        <td><button class="btn" type="button"><a href="/actualizar/actualizar_vino/{{ bodega.id }}">Seleccionar</a></button></td>
     </tr>
     {% endfor %}
 </table>

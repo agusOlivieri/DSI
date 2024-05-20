@@ -2,6 +2,7 @@
     "bodegas": [ 
         {
             "id": 1,
+            "crear": true,
             "nombre": "bodega1",
             "vino": {
                 "nombre": "vinoNuevo",
@@ -16,6 +17,7 @@
         },
         {
             "id": 1,
+            "crear": true,
             "nombre": "bodega1",
             "vino": {
                 "nombre": "vinoNuevo2",
@@ -31,6 +33,7 @@
         {
             "id": 2,
             "nombre": "bodega2",
+            "crear": true,
             "vino": {
                 "nombre": "vinoNuevo2",
                 "aniada": "aniada nueva2",
@@ -40,6 +43,17 @@
                 "bodega": 1,
                 "maridaje": 1,
                 "varietal": 2
+            }
+        },
+        {
+            "id": 2,
+            "nombre": "bodega2",
+            "crear": false,
+            "vino": {
+                "id": 5,
+                "ImagenEtiqueta": "nueva Imagensdasd",
+                "NotaDeCata": "nueva Notazvzxvdvzdvz",
+                "precioARS": 6000
             }
         }
     ]
