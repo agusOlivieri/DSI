@@ -1,16 +1,32 @@
 {
-    "bodega": {
-        "id": 1,
-        "nombre": "bodega1",
-        "vino": {
-            "nombre": "vinoNuevo",
-            "aniada": "aniada nueva",
-            "ImagenEtiqueta": "imagenNueva",
-            "NotaDeCata": "Nota de cada nueva",
-            "precioARS": 5000,
-            "bodega": 1,
-            "maridaje": 2,
-            "varietal": 3
+    "bodegas": [ 
+        {
+            "id": 1,
+            "nombre": "bodega1",
+            "vino": {
+                "nombre": "vinoNuevo",
+                "aniada": "aniada nueva",
+                "ImagenEtiqueta": "imagenNueva",
+                "NotaDeCata": "Nota de cada nueva",
+                "precioARS": 5000,
+                "bodega": 1,
+                "maridaje": 2,
+                "varietal": 3
+            }
+        },
+        {
+            "id": 1,
+            "nombre": "bodega1",
+            "vino": {
+                "nombre": "vinoNuevo2",
+                "aniada": "aniada nueva2",
+                "ImagenEtiqueta": "imagenNueva2",
+                "NotaDeCata": "Nota de cada nueva2",
+                "precioARS": 1000,
+                "bodega": 1,
+                "maridaje": 1,
+                "varietal": 2
+            }
         }
-    }
+    ]
 }

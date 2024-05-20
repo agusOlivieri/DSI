@@ -7,19 +7,23 @@ import json
 def index(request): 
     return render(request, 'index.html')
 
-def vinos(request):
-    vinos = list(Vino.objects.values())
-    return JsonResponse(vinos, safe=False)
-
-def verJson(request):
+def verActualizaciones(request):
     with open("actualizaciones.json") as file:
         data = json.load(file)
-    print(data)
-    return JsonResponse(data)
+    print(data["bodegas"][0]["id"])
+    return render(request, 'ver_actualizaciones.html', {
+        'json': data
+    })
 
-def actualizar_vinos(request):
+def actualizarVino(request):
     r = RegionVitinicola.objects.get(id=1)
     b = Bodega(nombre="prueba", perActualizacion=13, region=r)
     b.save()
     bodegas = list(Bodega.objects.values())
     return JsonResponse(bodegas, safe=False)
+
+def crearVino(request):
+    with open("actualizaciones.json") as file:
+        data = json.load(file)
+    #v = Maridaje.objects.get(id=data.bodega.vino.)
+    return HttpResponse('pruebas')

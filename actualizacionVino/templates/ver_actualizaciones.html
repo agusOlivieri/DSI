@@ -1,0 +1,18 @@
+<p>{{ json.bodegas }}</p>
+
+<h1>Lista de bodegas para actualizar</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Bodega</th>
+        <th>Elegir Bodega</th>
+    </tr>
+    <tr>
+        {% for bodega in json.bodegas %}
+        <td>{{ bodega.id }}</td>
+        <td>{{ bodega.nombre }}<td>
+        <td><button class="btn" type="button"><a href="/actualizar/crear_vino">Seleccionar</a></button></td>
+        {% endfor %}
+    </tr>
+</table>
