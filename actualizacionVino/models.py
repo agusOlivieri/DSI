@@ -2,64 +2,112 @@ from django.db import models
 
 # Create your models here.
 
-class RegionVitinicola(models.Model):
-    descrip = models.TextField()
-    nombre = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.nombre
-    
 class Bodega(models.Model):
     nombre = models.CharField(max_length=100)
-    descrip = models.TextField()
+    descripcion = models.TextField()
     historia = models.CharField(max_length=50)
-    perActualizacion = models.IntegerField()
-    coordenadasUbi = models.CharField(max_length=50)
-    region = models.ForeignKey(RegionVitinicola, on_delete=models.CASCADE)
+    periodoActualizacion = models.IntegerField()
+    coordenadasUbicacion = models.CharField(max_length=50)
 
-    def __str__(self):
+    def getNombre(self):
         return self.nombre
+    
+    def estaParaActualizarVinos(self):
+        return
+    
+    def actualizarDatosVino(self):
+        return
 
 class TipoUva(models.Model):
     descripcion = models.TextField()
     nombre = models.CharField(max_length=50)
 
-    def __str__(self):
-        return self.nombre
+    def esTipoUva(self):
+        return 
 
 class Maridaje(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
 
-    def __str__(self):
-        return self.nombre
+    def esMaridaje(self):
+        return
 
 class Varietal(models.Model):
     nombre = models.CharField(max_length=30)
-    descrip = models.TextField()
-    porcComposicion = models.IntegerField()
-    tipoVino = models.ForeignKey(TipoUva, on_delete=models.CASCADE)
+    descripcion = models.TextField()
+    porcentajeComposicion = models.FloatField()
+    tipoUva = models.ForeignKey(TipoUva, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.nombre
+    def new(self):
+        return
     
 class Vino(models.Model):
     añada = models.CharField(max_length=100)
-    ImagenEstiqueta = models.CharField(max_length=200)
+    ImagenEtiqueta = models.CharField(max_length=200)
     nombre = models.CharField(max_length=50)
-    notaDeCata = models.CharField(max_length=100)
+    notaDeCataBodega = models.CharField(max_length=100)
     precioARS = models.IntegerField()
     maridaje = models.ForeignKey(Maridaje, on_delete=models.CASCADE)
     varietal = models.ForeignKey(Varietal, on_delete=models.CASCADE)
     bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE)
+   
+    def esVinoParaActualizar(self):
+        return
+    
+    def setPrecio(self):
+        return
+    
+    def setNotaCata(self):
+        return
+    
+    def setImagenEtiqueta(self):
+        return
+    
+    def crearVarietal(self):
+        return
+    
+class Usuario(models.Model):
+    nombre = models.CharField(max_length=30)
+    premium = models.BooleanField()
+    password = models.CharField()
 
-    def __str__(self):
+    def getNombre(self):
         return self.nombre
+    
 
+class Siguiendo(models.Model):
+    fechaFin = models.DateField()
+    fechaInicio = models.DateField()
+    bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE)
 
+    def sosDeBodega(self):
+        return
 
+class Enofilo(models.Model):
+    nombre = models.CharField(max_length=30)
+    apellido = models.CharField(max_length=30)
+    imagenPerfil = models.ImageField()
+    siguiendo = models.ForeignKey(Siguiendo, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    vino = models.ForeignKey(Vino, on_delete=models.CASCADE)
 
+    def getNombreUsuario(self):
+        return
+    
+    def seguisABodega(self):
+        return
+    
+class InterfazApiBodega(models.Model):
+    
 
+    def obtenerActualizacionVinos(self):
+        return
+
+class InterfazNotificacionPush(models.Model):
+    
+
+    def notificarNovedadVinoParaBodega(self):
+        return
 
 
 
