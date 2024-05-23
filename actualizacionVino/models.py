@@ -143,9 +143,6 @@ class GestorImportarActualizaciones(models.Model):
     def buscarBodegasParaActualizar(self):
         return
 
-    def obtenerSeleccionBodega(self):
-        return
-    
     def tomarSeleccionBodega(self):
         return
     
