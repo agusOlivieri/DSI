@@ -109,5 +109,63 @@ class InterfazNotificacionPush(models.Model):
     def notificarNovedadVinoParaBodega(self):
         return
 
+class PantallaImportarActualizaciones(models.Model):
+    listaBodegasParaActualizar = []
+    resumenVinosImportados = []
+    seleccionBodega = None
 
+    def opImportarActualizacionVinos(self):
+        return
+    
+    def habilitar(self):
+        return
 
+    def mostrarBodegasParaActualizar(self):
+        return
+    
+    def tomarSeleccionBodega(self):
+        return
+
+    def mostrarResumenVinosImportados(self):
+        return
+
+class GestorImportarActualizaciones(models.Model):
+    seleccionBodega = None
+    listaBodegasParaActualizar = []
+    tipoUva = None
+    maridaje = None
+    listaSeguidoresDeBodega = []
+    datosActualizacionVinos = None
+
+    def opImportarActualizacionVinos(self):
+        return
+    
+    def buscarBodegasParaActualizar(self):
+        return
+
+    def obtenerSeleccionBodega(self):
+        return
+    
+    def tomarSeleccionBodega(self):
+        return
+    
+    def obtenerActualizacionVinosBodega(self):
+        return
+
+    def actualizarVinoExistente(self):
+        return
+    
+    def buscarMaridaje(self):
+        return
+    
+    def buscarTipoUva(self):
+        return
+    
+    def crearVinos(self):
+        return
+    
+    def buscarSeguidoresDeBodega(self):
+        return
+    
+    def finCU(self):
+        return
