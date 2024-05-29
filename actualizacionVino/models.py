@@ -26,22 +26,35 @@ class Bodega(models.Model):
         # Comparar la próxima fecha de actualización con la fecha actual, si la fecha actual es mayor o igual a la proxima actualizacion retorna true
         return datetime.now() >= proximaActualizacion
     
-    def actualizarDatosVino(self):
-        return
+    def actualizarDatosVino(self, nombre, añada, precio=None, nota_de_cata=None, imagen_etiqueta=None):
+        vinos = self.vino_set.all()  # Obtener todos los vinos que apuntan a esta bodega para buscar el que tenemos
+        for vino in vinos:
+            if vino.esVinoParaActualizar(nombre, añada):
+                if precio is not None:
+                    vino.setPrecio(precio)
+                if nota_de_cata is not None:
+                    vino.setNotaCata(nota_de_cata)
+                if imagen_etiqueta is not None:
+                    vino.setImagenEtiqueta(imagen_etiqueta)
+                vino.save() # Guardamos el vino actualizado
+                return True
+            else: 
+                return False # No se encontro el vino para actualizar
+        
 
 class TipoUva(models.Model):
     descripcion = models.TextField()
     nombre = models.CharField(max_length=50)
 
-    def esTipoUva(self):
-        return 
+    def esTipoUva(self, nombre):
+        return self.nombre == nombre
 
 class Maridaje(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
 
-    def esMaridaje(self):
-        return
+    def esMaridaje(self, nombre):
+        return self.nombre == nombre
 
 class Varietal(models.Model):
     nombre = models.CharField(max_length=30)
@@ -61,12 +74,15 @@ class Vino(models.Model):
     maridaje = models.ForeignKey(Maridaje, on_delete=models.CASCADE)
     varietal = models.ForeignKey(Varietal, on_delete=models.CASCADE)
     bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('nombre', 'añada')  # Definir una restricción de unicidad para el nombre y la añada (pk)
    
-    def esVinoParaActualizar(self):
-        return
+    def esVinoParaActualizar(self, nombre, añada): # con el nombre y la añada podemos identificar cualquier vino
+        return (self.añada == añada and self.nombre == nombre)
     
-    def setPrecio(self):
-        return
+    def setPrecio(self, precio):
+        self.precioARS = precio
     
     def setNotaCata(self):
         return
