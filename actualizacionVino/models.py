@@ -1,4 +1,6 @@
 from django.db import models
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 # Create your models here.
 
@@ -8,12 +10,21 @@ class Bodega(models.Model):
     historia = models.CharField(max_length=50)
     periodoActualizacion = models.IntegerField()
     coordenadasUbicacion = models.CharField(max_length=50)
+    ultimaActualizacion = models.DateTimeField()
 
     def getNombre(self):
         return self.nombre
     
     def estaParaActualizarVinos(self):
-        return
+        if not self.ultimaActualizacion:
+            # Si nunca se ha actualizado, se puede actualizar de inmediato
+            return True
+
+        # Calcular la próxima fecha de actualización sumando los meses del periodo de actualizacion a la ultima actualizacion (usamos relativedelta para ser mas precisos)
+        proximaActualizacion = self.ultimaActualizacion + relativedelta(months=self.periodoActualizacion)
+        
+        # Comparar la próxima fecha de actualización con la fecha actual, si la fecha actual es mayor o igual a la proxima actualizacion retorna true
+        return datetime.now() >= proximaActualizacion
     
     def actualizarDatosVino(self):
         return
@@ -69,7 +80,7 @@ class Vino(models.Model):
 class Usuario(models.Model):
     nombre = models.CharField(max_length=30)
     premium = models.BooleanField()
-    password = models.CharField()
+    password = models.CharField(max_length=30)
 
     def getNombre(self):
         return self.nombre
@@ -86,13 +97,13 @@ class Siguiendo(models.Model):
 class Enofilo(models.Model):
     nombre = models.CharField(max_length=30)
     apellido = models.CharField(max_length=30)
-    imagenPerfil = models.ImageField()
+    imagenPerfil = models.Field()
     siguiendo = models.ForeignKey(Siguiendo, on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     vino = models.ForeignKey(Vino, on_delete=models.CASCADE)
 
     def getNombreUsuario(self):
-        return
+        return self.usuario.nombre
     
     def seguisABodega(self):
         return
@@ -114,6 +125,7 @@ class PantallaImportarActualizaciones(models.Model):
     resumenVinosImportados = []
     seleccionBodega = None
 
+    
     def opImportarActualizacionVinos(self):
         return
     
