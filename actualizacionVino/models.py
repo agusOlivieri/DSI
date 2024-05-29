@@ -107,8 +107,8 @@ class Siguiendo(models.Model):
     fechaInicio = models.DateField()
     bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE)
 
-    def sosDeBodega(self):
-        return
+    def sosDeBodega(self, bodega):
+        return (self.bodega == bodega)
 
 class Enofilo(models.Model):
     nombre = models.CharField(max_length=30)
@@ -119,10 +119,10 @@ class Enofilo(models.Model):
     vino = models.ForeignKey(Vino, on_delete=models.CASCADE)
 
     def getNombreUsuario(self):
-        return self.usuario.nombre
-    
-    def seguisABodega(self):
-        return
+        return self.usuario.getNombre()
+
+    def seguisABodega(self, bodega):
+        return self.siguiendo.sosDeBodega(bodega)
     
 class InterfazApiBodega(models.Model):
     
