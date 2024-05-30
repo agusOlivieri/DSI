@@ -11,6 +11,7 @@ class Bodega(models.Model):
     periodoActualizacion = models.IntegerField()
     coordenadasUbicacion = models.CharField(max_length=50)
     ultimaActualizacion = models.DateTimeField()
+    api_url = models.URLField(max_length=200)
 
     def getNombre(self):
         return self.nombre
@@ -124,17 +125,6 @@ class Enofilo(models.Model):
     def seguisABodega(self, bodega):
         return self.siguiendo.sosDeBodega(bodega)
     
-class InterfazApiBodega(models.Model):
-    
-
-    def obtenerActualizacionVinos(self):
-        return
-
-class InterfazNotificacionPush(models.Model):
-    
-
-    def notificarNovedadVinoParaBodega(self):
-        return
 
 class PantallaImportarActualizaciones(models.Model):
     listaBodegasParaActualizar = []
@@ -155,42 +145,4 @@ class PantallaImportarActualizaciones(models.Model):
         return
 
     def mostrarResumenVinosImportados(self):
-        return
-
-class GestorImportarActualizaciones(models.Model):
-    seleccionBodega = None
-    listaBodegasParaActualizar = []
-    tipoUva = None
-    maridaje = None
-    listaSeguidoresDeBodega = []
-    datosActualizacionVinos = None
-
-    def opImportarActualizacionVinos(self):
-        return
-    
-    def buscarBodegasParaActualizar(self):
-        return
-
-    def tomarSeleccionBodega(self):
-        return
-    
-    def obtenerActualizacionVinosBodega(self):
-        return
-
-    def actualizarVinoExistente(self):
-        return
-    
-    def buscarMaridaje(self):
-        return
-    
-    def buscarTipoUva(self):
-        return
-    
-    def crearVinos(self):
-        return
-    
-    def buscarSeguidoresDeBodega(self):
-        return
-    
-    def finCU(self):
         return
