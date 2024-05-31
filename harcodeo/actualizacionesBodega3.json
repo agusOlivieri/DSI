@@ -1,0 +1,44 @@
+[
+    {
+        "nombre": "Vino Blanco Ámbar",
+        "añada": 2017,
+        "ImagenEtiqueta": "imagenNueva6",
+        "NotaDeCata": "Aromas de durazno y miel.",
+        "precioARS": 27000,
+        "bodega": 3,
+        "maridaje": 3,
+        "varietal": {
+            "descripcion": "Vino dulce con final meloso.",
+            "PorcentajeComposicion": 92,
+            "tipoUva": "Riesling"
+        }
+    },
+    {
+        "nombre": "Vino Rosado Primaveral",
+        "añada": 2020,
+        "ImagenEtiqueta": "imagenNueva3",
+        "NotaDeCata": "Notas de fresa y frambuesa.",
+        "precioARS": 25000,
+        "bodega": 3,
+        "maridaje": 2,
+        "varietal": {
+            "descripcion": "Vino ligero y fresco, ideal para el verano.",
+            "PorcentajeComposicion": 95,
+            "tipoUva": "Pinot Noir"
+        }
+    },
+    {
+        "nombre": "Vino Espumante Brillante",
+        "añada": 2018,
+        "ImagenEtiqueta": "imagenNueva9",
+        "NotaDeCata": "Aromas de manzana y pan tostado.",
+        "precioARS": 36000,
+        "bodega": 3,
+        "maridaje": 3,
+        "varietal": {
+            "descripcion": "Espumante fresco y vibrante.",
+            "PorcentajeComposicion": 81,
+            "tipoUva": "Chenin Blanc"
+        }
+    }
+]

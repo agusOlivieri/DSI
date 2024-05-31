@@ -12,8 +12,9 @@ class InterfazApiBodegas:
     # Como no implementamos las APIs de las bodegas, vamos a harcodear las respuestas de las APIs en un diccionario
     
     RESPONSES = {
-        'Bodega1': 'JSON bodega1',
-        'Bodega2': 'JSON bodega2',
+        'Bodega1': '../harcodeo/actualizacionesBodega1.json',
+        'Bodega2': '../harcodeo/actualizacionesBodega2.json',
+        'Bodega3': '../harcodeo/actualizacionesBodega3.json',
     }
     @staticmethod
     def obtenerActualizacionVinos(nombre_bodega):
@@ -35,11 +36,19 @@ class InterfazApiBodegas:
             response.raise_for_status()
         """
         # Al estar los datos harcodeados, simulamos la respuesta de la API
-        return InterfazApiBodegas.RESPONSES.get(nombre_bodega).json()
+        return InterfazApiBodegas.RESPONSES.get(nombre_bodega)
 
 
 class InterfazNotificacionPush:
     
+    def notificarEnofilo(enofilo):
+        notificado = True
+        #no implementado
+        return notificado
 
-    def notificarNovedadVinoParaBodega(self):
-        return
+    def notificarNovedadVinoParaBodega(self, enofilos):
+
+        for enofilo in enofilos:
+            self.notificarEnofilo(enofilo)
+
+        return ('Enofilos notificados con éxito.')

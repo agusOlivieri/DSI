@@ -4,6 +4,23 @@ from .models import *
 import json
 # Create your views here.
 
+class PantallaImportarActualizaciones:
+    
+    def opImportarActualizacionVinos(self):
+        return
+    
+    def habilitar(self):
+        return
+
+    def mostrarBodegasParaActualizar(self):
+        return
+    
+    def tomarSeleccionBodega(self):
+        return
+
+    def mostrarResumenVinosImportados(self):
+        return
+
 
 def index(request): 
     return render(request, 'index.html')

@@ -53,41 +53,70 @@ class Maridaje(models.Model):
         return self.nombre == nombre
 
 class Varietal(models.Model):
-    nombre = models.CharField(max_length=30)
+    nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
     porcentajeComposicion = models.FloatField()
     tipoUva = models.ForeignKey(TipoUva, on_delete=models.CASCADE)
 
-    def new(self):
-        return
+    def new(self, descripcion, porcentajeComposicion, tipoUva):
+        varietal = Varietal
+        varietal.descripcion = descripcion
+        varietal.porcentajeComposicion = porcentajeComposicion
+        varietal.tipoUva = tipoUva
+        varietal.save()
+        return 
     
 class Vino(models.Model):
     añada = models.CharField(max_length=100)
-    ImagenEtiqueta = models.CharField(max_length=200)
+    imagenEtiqueta = models.CharField(max_length=200)
     nombre = models.CharField(max_length=50)
     notaDeCataBodega = models.CharField(max_length=100)
     precioARS = models.IntegerField()
     maridaje = models.ForeignKey(Maridaje, on_delete=models.CASCADE)
     varietal = models.ForeignKey(Varietal, on_delete=models.CASCADE)
     bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE)
+   
 
     class Meta:
         unique_together = ('nombre', 'añada')  # Definir una restricción de unicidad para el nombre y la añada (pk)
-   
-    def esVinoParaActualizar(self, nombre, añada): # con el nombre y la añada podemos identificar cualquier vino
-        return (self.añada == añada and self.nombre == nombre)
+
+    def newVino(añada, imagenEtiqueta, nombre, precioARS,notaDeCataBodega, idmaridaje, bodega, nombreVarietal, descVarietal, porcentajeComp, tipoUva):
+        varietal = Varietal.new(nombreVarietal, descVarietal, porcentajeComp, tipoUva)
+        maridaje = Maridaje.objects.get(pk=idmaridaje)
+
+        vino = Vino
+        vino.añada = añada
+        vino.imagenEtiqueta = imagenEtiqueta
+        vino.nombre = nombre
+        vino.precioARS = precioARS
+        vino.notaDeCataBodega = notaDeCataBodega
+        vino.maridaje = maridaje
+        vino.varietal = varietal.id
+        vino.bodega = bodega
+
+        vino.save()
+        varietal.save()       
+
+        
+    def esVinoParaActualizar(self, añada, nombre):
+        if (self.añada == añada and self.nombre == nombre):
+            return True
+        return False
     
     def setPrecio(self, precio):
         self.precioARS = precio
+        self.save()
     
-    def setNotaCata(self):
-        return
+    def setNotaCata(self, nota):
+        self.notaDeCataBodega = nota
+        self.save()
     
-    def setImagenEtiqueta(self):
-        return
+    def setImagenEtiqueta(self, imagen):
+        self.imagen = imagen
+        self.save()
     
-    def crearVarietal(self):
-        return
+    def crearVarietal(self, nombreVarietal, descVarietal, porcentajeComp, tipoUva):
+        Varietal.new(nombreVarietal, descVarietal, porcentajeComp, tipoUva)
     
 class Usuario(models.Model):
     nombre = models.CharField(max_length=30)
@@ -103,8 +132,8 @@ class Siguiendo(models.Model):
     fechaInicio = models.DateField()
     bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE)
 
-    def sosDeBodega(self, bodega):
-        return (self.bodega == bodega)
+    def sosDeBodega(self, nombreBodega):
+        return (self.bodega.nombre == nombreBodega)
 
 class Enofilo(models.Model):
     nombre = models.CharField(max_length=30)
@@ -117,28 +146,7 @@ class Enofilo(models.Model):
     def getNombreUsuario(self):
         return self.usuario.getNombre()
 
-    def seguisABodega(self, bodega):
-        estaSiguiendo = Siguiendo.objects.get(pk=self.siguiendo)
-        return estaSiguiendo.sosDeBodega(bodega)
+    def seguisABodega(self, nombreBodega):
+        return self.siguiendo.sosDeBodega(nombreBodega)
     
 
-class PantallaImportarActualizaciones:
-    listaBodegasParaActualizar = []
-    resumenVinosImportados = []
-    seleccionBodega = None
-
-    
-    def opImportarActualizacionVinos(self):
-        return
-    
-    def habilitar(self):
-        return
-
-    def mostrarBodegasParaActualizar(self):
-        return
-    
-    def tomarSeleccionBodega(self):
-        return
-
-    def mostrarResumenVinosImportados(self):
-        return
