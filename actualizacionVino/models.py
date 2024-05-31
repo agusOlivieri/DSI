@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 
 # Create your models here.
 
@@ -33,17 +34,30 @@ class Maridaje(models.Model):
         return
 
 class Varietal(models.Model):
-    nombre = models.CharField(max_length=30)
     descripcion = models.TextField()
     porcentajeComposicion = models.FloatField()
     tipoUva = models.ForeignKey(TipoUva, on_delete=models.CASCADE)
 
-    def new(self):
-        return
+    #Agregar a diagrama de clases
+    def esTipoUva(self, uva):
+
+        if uva == self.tipoUva:
+            return True 
+                  #(TipoUva.objects.get(pk=uva))
+        return False
+
+    def new(self, descripcion, porcentajeComposicion, tipoUva):
+        varietal = Varietal
+        varietal.descripcion = descripcion
+        varietal.porcentajeComposicion = porcentajeComposicion
+        varietal.tipoUva = tipoUva
+        varietal.save()
+        return 
+    
     
 class Vino(models.Model):
     añada = models.CharField(max_length=100)
-    ImagenEtiqueta = models.CharField(max_length=200)
+    imagenEtiqueta = models.CharField(max_length=200)
     nombre = models.CharField(max_length=50)
     notaDeCataBodega = models.CharField(max_length=100)
     precioARS = models.IntegerField()
@@ -51,20 +65,45 @@ class Vino(models.Model):
     varietal = models.ForeignKey(Varietal, on_delete=models.CASCADE)
     bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE)
    
-    def esVinoParaActualizar(self):
-        return
+    def newVino(añada, imagenEtiqueta, nombre, precioARS,notaDeCataBodega, idmaridaje, bodega, nombreVarietal, descVarietal, porcentajeComp, tipoUva):
+        varietal = Varietal.new(nombreVarietal, descVarietal, porcentajeComp, tipoUva)
+        maridaje = Maridaje.objects.get(pk=idmaridaje)
+
+        vino = Vino
+        vino.añada = añada
+        vino.imagenEtiqueta = imagenEtiqueta
+        vino.nombre = nombre
+        vino.precioARS = precioARS
+        vino.notaDeCataBodega = notaDeCataBodega
+        vino.maridaje = maridaje
+        vino.varietal = varietal.id
+        vino.bodega = bodega
+
+        vino.save()
+        varietal.save()       
+
+
+       
+        
+    def esVinoParaActualizar(self, añada, nombre):
+        if (self.añada == añada and self.nombre == nombre):
+            return self
+        return False
     
-    def setPrecio(self):
-        return
+    def setPrecio(self, precio):
+        self.precioARS = precio
+        self.save()
     
-    def setNotaCata(self):
-        return
+    def setNotaCata(self, nota):
+        self.notaDeCataBodega = nota
+        self.save()
     
-    def setImagenEtiqueta(self):
-        return
+    def setImagenEtiqueta(self, imagen):
+        self.imagen = imagen
+        self.save()
     
-    def crearVarietal(self):
-        return
+    def crearVarietal(self, nombreVarietal, descVarietal, porcentajeComp, tipoUva):
+        Varietal.new(nombreVarietal, descVarietal, porcentajeComp, tipoUva)
     
 class Usuario(models.Model):
     nombre = models.CharField(max_length=30)
@@ -105,9 +144,17 @@ class InterfazApiBodega(models.Model):
 
 class InterfazNotificacionPush(models.Model):
     
+    def notificarEnofilo(enofilo):
+        notificado = True
+        #no implementado
+        return notificado
 
-    def notificarNovedadVinoParaBodega(self):
-        return
+    def notificarNovedadVinoParaBodega(self, enofilos):
+
+        for i in range(len(enofilos)):
+            self.notificarEnofilo(enofilos[i].usuario)
+
+        return ('Enofilos notificados con éxito.')
 
 class PantallaImportarActualizaciones(models.Model):
     listaBodegasParaActualizar = []

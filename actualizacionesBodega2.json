@@ -1,0 +1,44 @@
+[
+    {
+        "nombre": "Vino Blanco del Sol",
+        "añada": 2018,
+        "ImagenEtiqueta": "imagenNueva2",
+        "NotaDeCata": "Aromas cítricos y florales",
+        "precioARS": 28000,
+        "bodega": 2,
+        "maridaje": 1,
+        "varietal": {
+            "descripcion": "Vino fresco con toques de manzana verde y pera.",
+            "PorcentajeComposicion": 90,
+            "tipoUva": "Chardonnay"
+        }
+    },
+    {
+        "nombre": "Vino Tinto Reserva",
+        "añada": 2015,
+        "ImagenEtiqueta": "imagenNueva5",
+        "NotaDeCata": "Cuerpo completo con notas de cereza y roble.",
+        "precioARS": 32000,
+        "bodega": 2,
+        "maridaje": 2,
+        "varietal": {
+            "descripcion": "Vino con taninos suaves y final prolongado.",
+            "PorcentajeComposicion": 88,
+            "tipoUva": "Merlot"
+        }
+    },
+    {
+        "nombre": "Vino Rosado del Valle",
+        "añada": 2021,
+        "ImagenEtiqueta": "imagenNueva8",
+        "NotaDeCata": "Fresco con toques de cítricos.",
+        "precioARS": 26000,
+        "bodega": 2,
+        "maridaje": 2,
+        "varietal": {
+            "descripcion": "Vino rosado brillante y aromático.",
+            "PorcentajeComposicion": 93,
+            "tipoUva": "Grenache"
+        }
+    }
+]

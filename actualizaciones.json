@@ -5,15 +5,18 @@
             "nombre": "bodega1",
             "actualizaciones":[
                 {
-                    "crear": true,
                     "nombre": "vinoNuevo",
-                    "aniada": "aniada nueva",
+                    "añada": 2007,
                     "ImagenEtiqueta": "imagenNueva",
-                    "NotaDeCata": "Nota de cada nueva",
+                    "NotaDeCata": "Nota de cata nueva",
                     "precioARS": 5000,
                     "bodega": 1,
                     "maridaje": 2,
-                    "varietal": 3
+                    "varietal": {
+                        "descripcion": "Es más ligera que la cabernet sauvignon,1​ y produce un luminoso y claro vino tinto2​ que contribuye a la finura y deja un aroma a pimienta al mezclarse con uvas más robustas.",
+                        "PorcentajeComposicion": 84,
+                        "tipoUva": "Cabernet Franc"
+                    }
                 },
                 {
                     "crear": true,
@@ -24,7 +27,7 @@
                     "precioARS": 1000,
                     "bodega": 1,
                     "maridaje": 1,
-                    "varietal": 2
+                    "varietal": {}
                 }
             ]
         },
@@ -41,7 +44,7 @@
                     "precioARS": 1000,
                     "bodega": 1,
                     "maridaje": 1,
-                    "varietal": 2
+                    "varietal": {}
                 },
                 {
                     "crear": false,
