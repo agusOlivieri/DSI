@@ -9,9 +9,7 @@ class Bodega(models.Model):
     descripcion = models.TextField()
     historia = models.CharField(max_length=50)
     periodoActualizacion = models.IntegerField()
-    coordenadasUbicacion = models.CharField(max_length=50)
     ultimaActualizacion = models.DateTimeField()
-    api_url = models.URLField(max_length=200)
 
     def getNombre(self):
         return self.nombre
@@ -27,16 +25,13 @@ class Bodega(models.Model):
         # Comparar la próxima fecha de actualización con la fecha actual, si la fecha actual es mayor o igual a la proxima actualizacion retorna true
         return datetime.now() >= proximaActualizacion
     
-    def actualizarDatosVino(self, nombre, añada, precio=None, nota_de_cata=None, imagen_etiqueta=None):
-        vinos = self.vino_set.all()  # Obtener todos los vinos que apuntan a esta bodega para buscar el que tenemos
+    def actualizarDatosVino(self, nombre, añada, precio, nota_de_cata, imagen_etiqueta):
+        vinos = Vino.objects.all()  # Obtener todos los vinos que apuntan a esta bodega para buscar el que tenemos
         for vino in vinos:
-            if vino.esVinoParaActualizar(nombre, añada):
-                if precio is not None:
-                    vino.setPrecio(precio)
-                if nota_de_cata is not None:
-                    vino.setNotaCata(nota_de_cata)
-                if imagen_etiqueta is not None:
-                    vino.setImagenEtiqueta(imagen_etiqueta)
+            if vino.esVinoParaActualizar(nombre, añada) and (vino.bodega == self.id):
+                vino.setPrecio(precio)
+                vino.setNotaCata(nota_de_cata)
+                vino.setImagenEtiqueta(imagen_etiqueta)
                 vino.save() # Guardamos el vino actualizado
                 return True
             else: 
@@ -123,10 +118,11 @@ class Enofilo(models.Model):
         return self.usuario.getNombre()
 
     def seguisABodega(self, bodega):
-        return self.siguiendo.sosDeBodega(bodega)
+        estaSiguiendo = Siguiendo.objects.get(pk=self.siguiendo)
+        return estaSiguiendo.sosDeBodega(bodega)
     
 
-class PantallaImportarActualizaciones(models.Model):
+class PantallaImportarActualizaciones:
     listaBodegasParaActualizar = []
     resumenVinosImportados = []
     seleccionBodega = None
