@@ -1,8 +1,11 @@
 from django.urls import path
-from . import views
+from .controlers import GestorImportarActualizaciones
+from .views import PantallaImportarActualizaciones, index
+from .inicializador import inicializar
 
 urlpatterns = [
-    path('', views.index),
-    path('actualizar/', views.verActualizaciones),
-    path('actualizar/actualizar_vino/<int:id>', views.actualizarVino),
+    path('', index),
+    path('crear/', inicializar),
+    path('actualizar/', PantallaImportarActualizaciones.opImportarActualizacionVinos),
+    path('actualizar/actualizar_vino/<int:id>', PantallaImportarActualizaciones.tomarSeleccionBodega),
 ]

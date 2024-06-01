@@ -1,0 +1,82 @@
+[
+    {
+        "nombre": "Cabernet Sauvignon",
+        "descripcion": "Una de las uvas más conocidas y ampliamente plantadas en todo el mundo. Produce vinos de cuerpo completo, con altos niveles de taninos y notas de frutas negras, pimiento verde y especias."
+    },
+    {
+        "nombre": "Merlot",
+        "descripcion": "Conocida por su suavidad y accesibilidad. Produce vinos suaves y afrutados, con notas de ciruela, cereza y chocolate."
+    },
+    {
+        "nombre": "Pinot Noir",
+        "descripcion": "Una uva delicada que produce vinos elegantes y sutiles. Se caracteriza por sus aromas de frutos rojos, como fresas y cerezas, y su capacidad de envejecimiento."
+    },
+    {
+        "nombre": "Syrah",
+        "descripcion": "Conocida por sus vinos intensos y especiados. Produce vinos de color oscuro con notas de mora, pimienta y a veces un toque de carne ahumada."
+    },
+    {
+        "nombre": "Malbec",
+        "descripcion": "Popular en Argentina, produce vinos de cuerpo medio a completo con taninos suaves y sabores de ciruela, mora y especias."
+    },
+    {
+        "nombre": "Zinfandel",
+        "descripcion": "Produce vinos con una amplia gama de estilos, desde ligeros y afrutados hasta intensos y especiados, con notas de frutas rojas y negras y a veces un toque de pimienta."
+    },
+    {
+        "nombre": "Tempranillo",
+        "descripcion": "La uva principal de los vinos españoles de Rioja y Ribera del Duero. Produce vinos con sabores de frutas rojas, cuero y tabaco."
+    },
+    {
+        "nombre": "Chardonnay",
+        "descripcion": "Una de las uvas blancas más populares, utilizada en una variedad de estilos, desde vinos ligeros y frescos hasta ricos y con cuerpo. Notas de manzana, cítricos y, si se envejece en roble, vainilla y mantequilla."
+    },
+    {
+        "nombre": "Sauvignon Blanc",
+        "descripcion": "Conocida por sus vinos frescos y ácidos con notas de hierba, grosella espinosa y frutas tropicales."
+    },
+    {
+        "nombre": "Riesling",
+        "descripcion": "Produce vinos que van desde secos y minerales hasta dulces y afrutados, con notas de manzana, melocotón y a veces un toque de gasolina."
+    },
+    {
+        "nombre": "Pinot Grigio",
+        "descripcion": "Conocida por sus vinos ligeros y frescos, con sabores de pera, manzana y cítricos."
+    },
+    {
+        "nombre": "Gewürztraminer",
+        "descripcion": "Produce vinos aromáticos y a menudo dulces, con notas de lichi, rosa y especias."
+    },
+    {
+        "nombre": "Chenin Blanc",
+        "descripcion": "Versátil uva blanca que produce vinos secos, dulces y espumosos, con notas de manzana, miel y flores."
+    },
+    {
+        "nombre": "Moscato",
+        "descripcion": "Conocida por sus vinos dulces y afrutados, con notas de uva moscatel, melocotón y flor de naranja."
+    },
+    {
+        "nombre": "Sangiovese",
+        "descripcion": "La principal uva de los vinos italianos Chianti. Produce vinos con sabores de cereza, hierbas secas y un toque de tierra."
+    },
+    {
+        "nombre": "Nebbiolo",
+        "descripcion": "Uva utilizada en los prestigiosos vinos italianos Barolo y Barbaresco. Produce vinos con altos taninos y acidez, y sabores de rosas, alquitrán y cereza."
+    },
+    {
+        "nombre": "Grenache",
+        "descripcion": "Conocida por sus vinos afrutados y especiados, a menudo mezclada con otras uvas. Notas de fresa, frambuesa y especias."
+    },
+    {
+        "nombre": "Viognier",
+        "descripcion": "Produce vinos aromáticos y a menudo ricos, con notas de albaricoque, melocotón y flores."
+    },
+    {
+        "nombre": "Barbera",
+        "descripcion": "Uva italiana que produce vinos con alta acidez y sabores de cereza, ciruela y especias."
+    },
+    {
+        "nombre": "Petit Verdot",
+        "descripcion": "A menudo utilizada en mezclas, especialmente en Burdeos. Produce vinos con colores profundos y sabores de mora, violeta y especias."
+    }
+]

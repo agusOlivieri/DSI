@@ -7,7 +7,7 @@ from dateutil.relativedelta import relativedelta
 class Bodega(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField()
-    historia = models.CharField(max_length=50)
+    historia = models.TextField()
     periodoActualizacion = models.IntegerField()
     ultimaActualizacion = models.DateTimeField()
 
@@ -39,8 +39,8 @@ class Bodega(models.Model):
         
 
 class TipoUva(models.Model):
-    descripcion = models.TextField()
     nombre = models.CharField(max_length=50)
+    descripcion = models.TextField()
 
     def esTipoUva(self, nombre):
         return self.nombre == nombre
@@ -53,24 +53,23 @@ class Maridaje(models.Model):
         return self.nombre == nombre
 
 class Varietal(models.Model):
-    nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
-    porcentajeComposicion = models.FloatField()
+    porcentajeComposicion = models.IntegerField()
     tipoUva = models.ForeignKey(TipoUva, on_delete=models.CASCADE)
 
-    def new(self, descripcion, porcentajeComposicion, tipoUva):
+    def new(descripcion, porcentajeComposicion, tipoUva):
         varietal = Varietal
         varietal.descripcion = descripcion
         varietal.porcentajeComposicion = porcentajeComposicion
         varietal.tipoUva = tipoUva
         varietal.save()
-        return 
+        return varietal
     
 class Vino(models.Model):
-    añada = models.CharField(max_length=100)
-    imagenEtiqueta = models.CharField(max_length=200)
     nombre = models.CharField(max_length=50)
-    notaDeCataBodega = models.CharField(max_length=100)
+    añada = models.IntegerField()
+    imagenEtiqueta = models.CharField(max_length=200)
+    notaDeCataBodega = models.CharField(max_length=300)
     precioARS = models.IntegerField()
     maridaje = models.ForeignKey(Maridaje, on_delete=models.CASCADE)
     varietal = models.ForeignKey(Varietal, on_delete=models.CASCADE)
@@ -80,9 +79,9 @@ class Vino(models.Model):
     class Meta:
         unique_together = ('nombre', 'añada')  # Definir una restricción de unicidad para el nombre y la añada (pk)
 
-    def newVino(añada, imagenEtiqueta, nombre, precioARS,notaDeCataBodega, idmaridaje, bodega, nombreVarietal, descVarietal, porcentajeComp, tipoUva):
-        varietal = Varietal.new(nombreVarietal, descVarietal, porcentajeComp, tipoUva)
-        maridaje = Maridaje.objects.get(pk=idmaridaje)
+    def newVino(self, añada, imagenEtiqueta, nombre, precioARS,notaDeCataBodega, nombreMaridaje, bodega, nombreVarietal, descVarietal, porcentajeComp, tipoUva):
+        varietal = self.crearVarietal(nombreVarietal, descVarietal, porcentajeComp, tipoUva)
+        maridaje = Maridaje.objects.get(nombre=nombreMaridaje)
 
         vino = Vino
         vino.añada = añada
@@ -91,11 +90,10 @@ class Vino(models.Model):
         vino.precioARS = precioARS
         vino.notaDeCataBodega = notaDeCataBodega
         vino.maridaje = maridaje
-        vino.varietal = varietal.id
+        vino.varietal = varietal
         vino.bodega = bodega
 
-        vino.save()
-        varietal.save()       
+        vino.save()     
 
         
     def esVinoParaActualizar(self, añada, nombre):
@@ -116,7 +114,7 @@ class Vino(models.Model):
         self.save()
     
     def crearVarietal(self, nombreVarietal, descVarietal, porcentajeComp, tipoUva):
-        Varietal.new(nombreVarietal, descVarietal, porcentajeComp, tipoUva)
+        return Varietal.new(nombreVarietal, descVarietal, porcentajeComp, tipoUva)
     
 class Usuario(models.Model):
     nombre = models.CharField(max_length=30)
@@ -138,7 +136,7 @@ class Siguiendo(models.Model):
 class Enofilo(models.Model):
     nombre = models.CharField(max_length=30)
     apellido = models.CharField(max_length=30)
-    imagenPerfil = models.Field()
+    imagenPerfil = models.CharField(max_length=30)
     siguiendo = models.ForeignKey(Siguiendo, on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     vino = models.ForeignKey(Vino, on_delete=models.CASCADE)

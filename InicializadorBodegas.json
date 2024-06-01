@@ -1,0 +1,23 @@
+[
+    {
+        "nombre": "Bodega San Javier",
+        "descripcion": "Contamos con una bodega totalmente equipara para la elaboración de vinos de alta gama. Tanques de acero inoxidable para la fermentación y guarda.",
+        "historia": "En el año 2002 comenzamos nuestro camino recuperando la viticultura del valle de Traslasierra.",
+        "periodoActualizacion": 3,
+        "ultimaActualizacion": "2024-02-01 10:15:30.123456+03:00"
+    },
+    {
+        "nombre": "Bodega Las Rosas",
+        "descripcion": "Una bodega boutique enfocada en la producción de vinos orgánicos. Utilizamos métodos tradicionales y sostenibles.",
+        "historia": "Fundada en 1998, Bodega Las Rosas se ha dedicado a la producción de vinos orgánicos de alta calidad, respetando el medio ambiente y las tradiciones locales.",
+        "periodoActualizacion": 6,
+        "ultimaActualizacion": "2024-03-15 14:30:45.654321+03:00"
+    },
+    {
+        "nombre": "Bodega Altamira",
+        "descripcion": "Especializados en vinos de terroir, capturando la esencia de nuestro viñedo ubicado en las sierras de Córdoba.",
+        "historia": "Desde 2005, Bodega Altamira ha trabajado incansablemente para reflejar el carácter único de nuestro terroir en cada botella.",
+        "periodoActualizacion": 4,
+        "ultimaActualizacion": "2024-01-10 09:20:15.987654+03:00"
+    }
+]

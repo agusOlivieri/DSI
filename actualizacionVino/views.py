@@ -1,21 +1,28 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+
 from .models import *
+from .controlers import GestorImportarActualizaciones
 import json
 # Create your views here.
 
 class PantallaImportarActualizaciones:
     
-    def opImportarActualizacionVinos(self):
-        return
-    
-    def habilitar(self):
-        return
+    def opImportarActualizacionVinos(request):
+        return PantallaImportarActualizaciones.habilitar(request)
 
-    def mostrarBodegasParaActualizar(self):
-        return
+    def habilitar(request):
+        listaBodegasParaActualizar = GestorImportarActualizaciones.opImportarActualizacionVinos
+        return PantallaImportarActualizaciones.mostrarBodegasParaActualizar(request, listaBodegasParaActualizar)
+  
+    def mostrarBodegasParaActualizar(request, bodegasParaActualizar):
+        return render(request, 'bodegas_para_actualizar.html', {
+            'bodegas': bodegasParaActualizar
+        })
     
-    def tomarSeleccionBodega(self):
+    def tomarSeleccionBodega(request, id):
+        GestorImportarActualizaciones.tomarSeleccionBodega(id)
+        PantallaImportarActualizaciones.mostrarResumenVinosImportados
         return
 
     def mostrarResumenVinosImportados(self):
