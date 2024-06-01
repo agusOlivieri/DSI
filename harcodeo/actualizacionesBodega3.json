@@ -20,7 +20,7 @@
         "NotaDeCata": "Notas de fresa y frambuesa.",
         "precioARS": 25000,
         "bodega": 3,
-        "maridaje": 2,
+        "maridaje": 9,
         "varietal": {
             "descripcion": "Vino ligero y fresco, ideal para el verano.",
             "PorcentajeComposicion": 95,

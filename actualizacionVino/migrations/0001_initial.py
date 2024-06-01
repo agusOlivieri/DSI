@@ -21,20 +21,13 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='RegionVitinicola',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('descrip', models.TextField()),
-                ('nombre', models.CharField(max_length=100)),
-            ],
-        ),
-        migrations.CreateModel(
             name='Varietal',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nombre', models.CharField(max_length=30)),
-                ('descrip', models.TextField()),
-                ('porcComposicion', models.IntegerField()),
+                ('descripcion', models.TextField()),
+                ('porcentajeComposicion', models.IntegerField()),
+                ('tipoUva', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='actualizacionVino.tipouva'))
             ],
         ),
         migrations.CreateModel(
@@ -42,11 +35,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nombre', models.CharField(max_length=100)),
-                ('descrip', models.TextField()),
+                ('descripcion', models.TextField()),
                 ('historia', models.CharField(max_length=50)),
-                ('perActualizacion', models.IntegerField()),
-                ('coordenadasUbi', models.CharField(max_length=50)),
-                ('region', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='actualizacionVino.regionvitinicola')),
+                ('periodoActualizacion', models.IntegerField()),
+                ('ultimaActualizacion', models.DateTimeField())
             ],
         ),
         migrations.CreateModel(
@@ -54,13 +46,13 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('añada', models.CharField(max_length=100)),
-                ('ImagenEstiqueta', models.CharField(max_length=200)),
+                ('ImagenEtiqueta', models.CharField(max_length=200)),
                 ('nombre', models.CharField(max_length=50)),
-                ('notaDeCata', models.CharField(max_length=100)),
+                ('notaDeCataBodega', models.CharField(max_length=100)),
                 ('precioARS', models.IntegerField()),
-                ('bodega', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='actualizacionVino.bodega')),
                 ('maridaje', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='actualizacionVino.maridaje')),
                 ('varietal', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='actualizacionVino.varietal')),
+                ('bodega', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='actualizacionVino.bodega'))
             ],
         ),
     ]

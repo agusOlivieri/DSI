@@ -1,0 +1,42 @@
+[
+    {
+        "nombre": "Carnes Rojas",
+        "descripcion": "Van de maravillas con vinos tintos de variedades intensas, con paso por barrica. Malbec, Cabernet Sauvignon, Cabernet Franc, Bonarda, Petit Verdot y Tempranillo."
+    },
+    {
+        "nombre": "Carnes Blancas",
+        "descripcion": "Maridan bien con vinos blancos con buen cuerpo y acidez como Chardonnay y Sauvignon Blanc. También se pueden disfrutar con vinos tintos ligeros como Pinot Noir."
+    },
+    {
+        "nombre": "Pescados y Mariscos",
+        "descripcion": "Ideales con vinos blancos frescos y ligeros como Albariño, Riesling y Chardonnay sin barrica. Los espumantes también son una excelente opción."
+    },
+    {
+        "nombre": "Quesos",
+        "descripcion": "Los quesos suaves combinan bien con vinos blancos y rosados, mientras que los quesos curados e intensos van mejor con tintos robustos como Cabernet Sauvignon y Syrah."
+    },
+    {
+        "nombre": "Pastas",
+        "descripcion": "Dependiendo de la salsa, pueden maridar con una variedad de vinos. Las pastas con salsas de tomate van bien con tintos como Sangiovese y Merlot, mientras que las salsas cremosas combinan con Chardonnay."
+    },
+    {
+        "nombre": "Postres",
+        "descripcion": "Los vinos dulces como el Moscatel y el Sauternes son ideales. Los espumantes dulces también son una excelente opción para acompañar postres."
+    },
+    {
+        "nombre": "Comida Picante",
+        "descripcion": "Los vinos con un toque de dulzura como Riesling y Gewürztraminer pueden equilibrar el picante. También se pueden considerar tintos ligeros y afrutados."
+    },
+    {
+        "nombre": "Ensaladas",
+        "descripcion": "Los vinos blancos ligeros y frescos como Sauvignon Blanc y Pinot Grigio son ideales para acompañar ensaladas, especialmente las que llevan vinagretas."
+    },
+    {
+        "nombre": "Platos Vegetarianos",
+        "descripcion": "Maridan bien con una amplia variedad de vinos, dependiendo del plato. Los vinos blancos frescos y los tintos ligeros como Pinot Noir son buenas opciones."
+    },
+    {
+        "nombre": "Charcutería",
+        "descripcion": "Las tablas de embutidos y quesos maridan bien con vinos tintos robustos como Syrah, Zinfandel y vinos espumantes secos como el Cava."
+    }
+]

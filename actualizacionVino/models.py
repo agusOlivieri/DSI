@@ -51,6 +51,7 @@ class Maridaje(models.Model):
 
     def esMaridaje(self, nombre):
         return self.nombre == nombre
+    
 
 class Varietal(models.Model):
     nombre = models.CharField(max_length=50)
@@ -64,7 +65,7 @@ class Varietal(models.Model):
         varietal.porcentajeComposicion = porcentajeComposicion
         varietal.tipoUva = tipoUva
         varietal.save()
-        return 
+        return self
     
 class Vino(models.Model):
     añada = models.CharField(max_length=100)
@@ -80,9 +81,9 @@ class Vino(models.Model):
     class Meta:
         unique_together = ('nombre', 'añada')  # Definir una restricción de unicidad para el nombre y la añada (pk)
 
-    def newVino(añada, imagenEtiqueta, nombre, precioARS,notaDeCataBodega, idmaridaje, bodega, nombreVarietal, descVarietal, porcentajeComp, tipoUva):
-        varietal = Varietal.new(nombreVarietal, descVarietal, porcentajeComp, tipoUva)
-        maridaje = Maridaje.objects.get(pk=idmaridaje)
+    def newVino(self, añada, imagenEtiqueta, nombre, precioARS,notaDeCataBodega, nombreMaridaje, bodega, nombreVarietal, descVarietal, porcentajeComp, tipoUva):
+        varietal = self.crearVarietal(nombreVarietal, descVarietal, porcentajeComp, tipoUva)
+        maridaje = Maridaje.objects.get(nombre=nombreMaridaje)
 
         vino = Vino
         vino.añada = añada
@@ -91,7 +92,7 @@ class Vino(models.Model):
         vino.precioARS = precioARS
         vino.notaDeCataBodega = notaDeCataBodega
         vino.maridaje = maridaje
-        vino.varietal = varietal.id
+        vino.varietal = varietal
         vino.bodega = bodega
 
         vino.save()
@@ -116,7 +117,7 @@ class Vino(models.Model):
         self.save()
     
     def crearVarietal(self, nombreVarietal, descVarietal, porcentajeComp, tipoUva):
-        Varietal.new(nombreVarietal, descVarietal, porcentajeComp, tipoUva)
+        return Varietal.new(nombreVarietal, descVarietal, porcentajeComp, tipoUva)
     
 class Usuario(models.Model):
     nombre = models.CharField(max_length=30)
