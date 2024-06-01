@@ -22,8 +22,8 @@ class PantallaImportarActualizaciones:
     
     def tomarSeleccionBodega(request, id):
         GestorImportarActualizaciones.tomarSeleccionBodega(id)
-        PantallaImportarActualizaciones.mostrarResumenVinosImportados
-        return
+        return PantallaImportarActualizaciones.mostrarResumenVinosImportados
+        
 
     def mostrarResumenVinosImportados(self):
         return
