@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+from datetime import datetime, timezone
 from dateutil.relativedelta import relativedelta
 
 # Create your models here.
@@ -10,11 +10,12 @@ class Bodega(models.Model):
     historia = models.TextField()
     periodoActualizacion = models.IntegerField()
     ultimaActualizacion = models.DateTimeField()
-
+    
     def getNombre(self):
         return self.nombre
     
     def estaParaActualizarVinos(self):
+        now_aware = datetime.now(timezone.utc)
         if not self.ultimaActualizacion:
             # Si nunca se ha actualizado, se puede actualizar de inmediato
             return True
@@ -23,7 +24,7 @@ class Bodega(models.Model):
         proximaActualizacion = self.ultimaActualizacion + relativedelta(months=self.periodoActualizacion)
         
         # Comparar la próxima fecha de actualización con la fecha actual, si la fecha actual es mayor o igual a la proxima actualizacion retorna true
-        return datetime.now() >= proximaActualizacion
+        return now_aware >= proximaActualizacion
     
     def actualizarDatosVino(self, nombre, añada, precio, nota_de_cata, imagen_etiqueta):
         vinos = Vino.objects.all()  # Obtener todos los vinos que apuntan a esta bodega para buscar el que tenemos

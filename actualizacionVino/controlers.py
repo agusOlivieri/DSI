@@ -5,23 +5,23 @@ from .models import *
 
 class GestorImportarActualizaciones:
     seleccionBodega = None
-    listaBodegasParaActualizar = []
     tipoUva = None
     maridaje = None
     listaSeguidoresDeBodega = []
     datosActualizacionVinos = None
 
-    def opImportarActualizacionVinos(request):
-        listaBodegasParaActualizar = GestorImportarActualizaciones.buscarBodegasParaActualizar
+    def opImportarActualizacionVinos():
+        listaBodegasParaActualizar = GestorImportarActualizaciones.buscarBodegasParaActualizar()
         return listaBodegasParaActualizar
     
-    def buscarBodegasParaActualizar(self):
+    def buscarBodegasParaActualizar():
+        listaBodegasParaActualizar = []
         bodegas = Bodega.objects.all()
         for bodega in bodegas:
             if bodega.estaParaActualizarVinos():
                 nombre = bodega.getNombre()
-                self.listaBodegasParaActualizar.append(nombre)
-        return self.listaBodegasParaActualizar
+                listaBodegasParaActualizar.append(nombre)
+        return listaBodegasParaActualizar
     
     def tomarSeleccionBodega(id):
         bodegaSeleccionada = Bodega.objects.get(id = id).getNombre

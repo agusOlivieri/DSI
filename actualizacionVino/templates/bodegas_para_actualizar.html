@@ -15,16 +15,14 @@
         <table class="tabla">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Bodega</th>
                     <th>Elegir Bodega</th>
                 </tr>
             </thead>
             <tbody>
-            {% for bodega in json.bodegas %}
+            {% for bodega in bodegas %}
                 <tr>
-                    <td>{{ bodega.id }}</td>
-                    <td>{{ bodega.nombre }}</td>
+                    <td>{{ bodega }}</td>
                     <td>
                         <button class="btn" type="button">
                             <a href="/actualizar/actualizar_vino/{{ bodega.id }}">Seleccionar</a>

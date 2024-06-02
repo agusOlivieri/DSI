@@ -12,10 +12,12 @@ class PantallaImportarActualizaciones:
         return PantallaImportarActualizaciones.habilitar(request)
 
     def habilitar(request):
-        listaBodegasParaActualizar = GestorImportarActualizaciones.opImportarActualizacionVinos
+        listaBodegasParaActualizar = GestorImportarActualizaciones.opImportarActualizacionVinos()
         return PantallaImportarActualizaciones.mostrarBodegasParaActualizar(request, listaBodegasParaActualizar)
   
     def mostrarBodegasParaActualizar(request, bodegasParaActualizar):
+
+        # return JsonResponse(bodegasParaActualizar, safe=False)
         return render(request, 'bodegas_para_actualizar.html', {
             'bodegas': bodegasParaActualizar
         })
