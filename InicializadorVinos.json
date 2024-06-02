@@ -10,7 +10,7 @@
         "varietal": {
             "descripcion": "Vino robusto con taninos bien definidos.",
             "PorcentajeComposicion": 85,
-            "tipoUva": "Cabernet Sauvignon"
+            "tipoUva": 1
         }
     },
     {
@@ -24,7 +24,7 @@
         "varietal": {
             "descripcion": "Es más ligera que la cabernet sauvignon, y produce un luminoso y claro vino tinto que contribuye a la finura y deja un aroma a pimienta al mezclarse con uvas más robustas.",
             "PorcentajeComposicion": 84,
-            "tipoUva": "Cabernet Franc"
+            "tipoUva": 3
         }
     },
     {
@@ -38,7 +38,7 @@
         "varietal": {
             "descripcion": "Espumante elegante con notas de miel y brioche.",
             "PorcentajeComposicion": 80,
-            "tipoUva": "Pinot Meunier"
+            "tipoUva": 5
         }
     },
     {
@@ -52,7 +52,7 @@
         "varietal": {
             "descripcion": "Vino elegante con taninos suaves y un final aterciopelado.",
             "PorcentajeComposicion": 87,
-            "tipoUva": "Tempranillo"
+            "tipoUva": 2
         }
     },
     {
@@ -66,7 +66,7 @@
         "varietal": {
             "descripcion": "Vino fresco con toques de manzana verde y pera.",
             "PorcentajeComposicion": 90,
-            "tipoUva": "Chardonnay"
+            "tipoUva": 12
         }
     },
     {
@@ -80,7 +80,7 @@
         "varietal": {
             "descripcion": "Vino suave con un final dulce.",
             "PorcentajeComposicion": 92,
-            "tipoUva": "Moscato"
+            "tipoUva": 20
         }
     },
     {
@@ -94,7 +94,7 @@
         "varietal": {
             "descripcion": "Vino dulce con final meloso.",
             "PorcentajeComposicion": 92,
-            "tipoUva": "Riesling"
+            "tipoUva": 6
         }
     }
 ]
