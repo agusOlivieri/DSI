@@ -12,8 +12,8 @@ class InterfazApiBodegas:
     # Como no implementamos las APIs de las bodegas, vamos a harcodear las respuestas de las APIs en un diccionario
     
     RESPONSES = {
-        'Bodega1': '../harcodeo/actualizacionesBodega1.json',
-        'Bodega2': '../harcodeo/actualizacionesBodega2.json',
+        'Bodega San Javier': 'actualizacionesBodega1.json',
+        'Bodega Altamira': '../harcodeo/actualizacionesBodega2.json',
         'Bodega3': '../harcodeo/actualizacionesBodega3.json',
     }
     @staticmethod
@@ -36,7 +36,7 @@ class InterfazApiBodegas:
             response.raise_for_status()
         """
         # Al estar los datos harcodeados, simulamos la respuesta de la API
-        return InterfazApiBodegas.RESPONSES.get(nombre_bodega)
+        return InterfazApiBodegas.RESPONSES[nombre_bodega]
 
 
 class InterfazNotificacionPush:

@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from .interfaces import *
 from .models import *
+import json
 
 class GestorImportarActualizaciones:
     seleccionBodega = None
@@ -23,15 +24,18 @@ class GestorImportarActualizaciones:
                 listaBodegasParaActualizar.append(nombre)
         return listaBodegasParaActualizar
     
-    def tomarSeleccionBodega(id):
-        bodegaSeleccionada = Bodega.objects.get(id = id).getNombre
-
-        datosActualizacionVinos = GestorImportarActualizaciones.obtenerActualizacionVinosBodega(bodegaSeleccionada)
-        return
+    def tomarSeleccionBodega(nom):
+        bodegaSeleccionada = Bodega.objects.get(nombre = nom).getNombre()
+        actualizaciones = GestorImportarActualizaciones.obtenerActualizacionVinosBodega(bodegaSeleccionada)
+        return actualizaciones
     
     def obtenerActualizacionVinosBodega(bodega):
         actualizaciones = InterfazApiBodegas.obtenerActualizacionVinos(bodega)
-        return actualizaciones
+        
+        with open(actualizaciones, encoding='utf-8') as file:
+            data = json.load(file)
+           
+        return data
 
     def actualizarVinoExistente(self):
         return

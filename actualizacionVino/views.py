@@ -16,15 +16,18 @@ class PantallaImportarActualizaciones:
         return PantallaImportarActualizaciones.mostrarBodegasParaActualizar(request, listaBodegasParaActualizar)
   
     def mostrarBodegasParaActualizar(request, bodegasParaActualizar):
-
-        # return JsonResponse(bodegasParaActualizar, safe=False)
         return render(request, 'bodegas_para_actualizar.html', {
             'bodegas': bodegasParaActualizar
         })
     
-    def tomarSeleccionBodega(request, id):
-        GestorImportarActualizaciones.tomarSeleccionBodega(id)
-        return PantallaImportarActualizaciones.mostrarResumenVinosImportados
+    def tomarSeleccionBodega(request, nombre):
+        actualizaciones = GestorImportarActualizaciones.tomarSeleccionBodega(nombre)
+        print("-----")
+        print(actualizaciones)
+        print("-----")
+        return JsonResponse(actualizaciones, safe=False)
+        
+        # return PantallaImportarActualizaciones.mostrarResumenVinosImportados
         
 
     def mostrarResumenVinosImportados(self):

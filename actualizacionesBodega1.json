@@ -2,35 +2,35 @@
     {
         "nombre": "Vino Tinto Gran Enemigo",
         "añada": 2016,
-        "ImagenEtiqueta": "imagenNueva1",
-        "NotaDeCata": "Cuerpo completo con notas de chocolate y tabaco.",
-        "precioARS": 31000,
+        "ImagenEtiqueta": "imagenNuevaDeActualización",
+        "NotaDeCata": "Intensos aromas a grosella negra y ciruela, con notas de pimienta negra y roble tostado. Final largo y elegante.",
+        "precioARS": 35059,
         "bodega": 1,
-        "maridaje": 2,
+        "maridaje": 1,
         "varietal": {
             "descripcion": "Es más ligera que la cabernet sauvignon, y produce un luminoso y claro vino tinto que contribuye a la finura y deja un aroma a pimienta al mezclarse con uvas más robustas.",
             "PorcentajeComposicion": 84,
-            "tipoUva": "Cabernet Franc"
+            "tipoUva": 3
         }
     },
     {
         "nombre": "Vino Espumante Estrella",
         "añada": 2019,
-        "ImagenEtiqueta": "imagenNueva4",
-        "NotaDeCata": "Burbujas finas con toques de almendra.",
-        "precioARS": 35000,
+        "ImagenEtiqueta": "imagenNuevaDeActualización2",
+        "NotaDeCata": "Refrescante con aromas de manzana verde y cítricos, toques de vainilla y una textura cremosa. Equilibrado y suave.",
+        "precioARS": 34000,
         "bodega": 1,
-        "maridaje": 1,
+        "maridaje": 3,
         "varietal": {
             "descripcion": "Espumante elegante con notas de miel y brioche.",
             "PorcentajeComposicion": 80,
-            "tipoUva": "Pinot Meunier"
+            "tipoUva": 5
         }
     },
     {
         "nombre": "Vino Tinto Roble Viejo",
         "añada": 2014,
-        "ImagenEtiqueta": "imagenNueva7",
+        "ImagenEtiqueta": "imagenNuevaVinoCreado",
         "NotaDeCata": "Notas de vainilla y especias.",
         "precioARS": 34000,
         "bodega": 1,
@@ -38,7 +38,7 @@
         "varietal": {
             "descripcion": "Vino intenso con buen cuerpo.",
             "PorcentajeComposicion": 86,
-            "tipoUva": "Malbec"
+            "tipoUva": 5
         }
     },
     {
@@ -48,11 +48,11 @@
         "NotaDeCata": "Frutos rojos y especias.",
         "precioARS": 33000,
         "bodega": 1,
-        "maridaje": 1,
+        "maridaje": 2,
         "varietal": {
             "descripcion": "Vino bien estructurado y aromático.",
             "PorcentajeComposicion": 89,
-            "tipoUva": "Syrah"
+            "tipoUva": 4
         }
     }
 ]
