@@ -13,8 +13,8 @@ class InterfazApiBodegas:
     
     RESPONSES = {
         'Bodega San Javier': 'actualizacionesBodega1.json',
-        'Bodega Altamira': '../harcodeo/actualizacionesBodega2.json',
-        'Bodega3': '../harcodeo/actualizacionesBodega3.json',
+        'Bodega Altamira': 'actualizacionesBodega2.json',
+        'Bodega3': 'actualizacionesBodega3.json',
     }
     @staticmethod
     def obtenerActualizacionVinos(nombre_bodega):

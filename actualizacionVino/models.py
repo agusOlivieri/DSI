@@ -36,9 +36,9 @@ class Bodega(models.Model):
 
     def actualizarDatosVino(actualizacion):
         nom = actualizacion.get('nombre')
+        imagen = actualizacion.get('ImagenEtiqueta')
         notaDeCata = actualizacion.get('NotaDeCata')
         precio = actualizacion.get('precioARS')
-        imagen = actualizacion.get('ImagenEtiqueta')
 
         vino = Vino.objects.get(nombre=nom)
 
@@ -47,32 +47,43 @@ class Bodega(models.Model):
         vino.setImagenEtiqueta(imagen)
         vino.save() # Guardamos el vino actualizado
 
+    def crearVino(actualizacion):
+        nom = actualizacion.get('nombre')
+        añada = actualizacion.get("añada")
+        imagen = actualizacion.get('ImagenEtiqueta')
+        notaDeCata = actualizacion.get('NotaDeCata')
+        precio = actualizacion.get('precioARS')
+        bod = actualizacion.get('bodega')
+        mar = actualizacion.get('maridaje')
+
+        descVarietal = actualizacion.get('varietal').get('descripcion')
+        porcentajeComp = actualizacion.get('varietal').get('PorcentajeComposicion')
+        tipoUva = actualizacion.get('varietal').get('tipoUva')
         
+        Vino.newVino(añada, imagen, nom, precio, notaDeCata, mar, bod, descVarietal, porcentajeComp, tipoUva)
 
 class TipoUva(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
 
-    def esTipoUva(self, nombre):
-        return self.nombre == nombre
+    def esTipoUva(self, tipoId):
+        return self.id == tipoId
 
 class Maridaje(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
 
-    def esMaridaje(self, nombre):
-        return self.nombre == nombre
+    def esMaridaje(self, marId):
+        return self.id == marId
 
 class Varietal(models.Model):
     descripcion = models.TextField()
     porcentajeComposicion = models.IntegerField()
     tipoUva = models.ForeignKey(TipoUva, on_delete=models.CASCADE)
 
-    def new(descripcion, porcentajeComposicion, tipoUva):
-        varietal = Varietal
-        varietal.descripcion = descripcion
-        varietal.porcentajeComposicion = porcentajeComposicion
-        varietal.tipoUva = tipoUva
+    def newVarietal(desc, porcentaje, tipo):
+        print(desc)
+        varietal = Varietal(descripcion=desc, porcentajeComposicion=porcentaje, tipoUva=tipo)
         varietal.save()
         return varietal
     
@@ -86,23 +97,17 @@ class Vino(models.Model):
     varietal = models.ForeignKey(Varietal, on_delete=models.CASCADE)
     bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE)
    
-
     class Meta:
         unique_together = ('nombre', 'añada')  # Definir una restricción de unicidad para el nombre y la añada (pk)
 
-    def newVino(self, añada, imagenEtiqueta, nombre, precioARS,notaDeCataBodega, nombreMaridaje, bodega, nombreVarietal, descVarietal, porcentajeComp, tipoUva):
-        varietal = self.crearVarietal(nombreVarietal, descVarietal, porcentajeComp, tipoUva)
-        maridaje = Maridaje.objects.get(nombre=nombreMaridaje)
+    def newVino(aña, imagen, nom, precio,notaDeCata, maridajeId, bodegaId, descVarietal, porcentajeComp, tipoUva):
+        tu = TipoUva.objects.get(id=tipoUva) #<- tipo uva 
+        
+        nuevoVarietal = Vino.crearVarietal(descVarietal, porcentajeComp, tu)
+        bod = Bodega.objects.get(id=bodegaId)
+        mar = Maridaje.objects.get(id=maridajeId)
 
-        vino = Vino
-        vino.añada = añada
-        vino.imagenEtiqueta = imagenEtiqueta
-        vino.nombre = nombre
-        vino.precioARS = precioARS
-        vino.notaDeCataBodega = notaDeCataBodega
-        vino.maridaje = maridaje
-        vino.varietal = varietal
-        vino.bodega = bodega
+        vino = Vino(nombre=nom, añada=aña, imagenEtiqueta=imagen, notaDeCataBodega=notaDeCata, precioARS=precio, maridaje=mar, varietal=nuevoVarietal, bodega=bod)
         vino.save()     
  
     def esVinoParaActualizar(nom, vino):
@@ -123,8 +128,8 @@ class Vino(models.Model):
         self.imagen = imagen
         self.save()
     
-    def crearVarietal(self, nombreVarietal, descVarietal, porcentajeComp, tipoUva):
-        return Varietal.new(nombreVarietal, descVarietal, porcentajeComp, tipoUva)
+    def crearVarietal(descVarietal, porcentajeComp, tipoUva):
+        return Varietal.newVarietal(descVarietal, porcentajeComp, tipoUva)
     
 class Usuario(models.Model):
     nombre = models.CharField(max_length=30)
@@ -133,8 +138,7 @@ class Usuario(models.Model):
 
     def getNombre(self):
         return self.nombre
-    
-
+     
 class Siguiendo(models.Model):
     fechaFin = models.DateField()
     fechaInicio = models.DateField()

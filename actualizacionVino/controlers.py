@@ -41,15 +41,17 @@ class GestorImportarActualizaciones:
     def actualizarOCrearVino(actualizaciones, bodegaSeleccionada):
         vinosImportados = []
         bod = Bodega.objects.get(nombre=bodegaSeleccionada)
-
+        print(bod.nombre)
         for actualizacion in actualizaciones:
             if Bodega.esVinoParaActualizar(actualizacion, bod): # <- por cada actualizacion valida si el vino existe, si es así, lo actualiza, si no, lo crea.
                 Bodega.actualizarDatosVino(actualizacion)
                 print("vino actualizado", actualizacion.get('nombre'))
             else: # <- creamos el vino
                 # primero validamos que existan el maridaje y el tipo de uva en nuestra BD
-                # if (GestorImportarActualizaciones.buscarMaridaje() and GestorImportarActualizaciones.buscarTipoUva()):
-                print("to do")
+                if (GestorImportarActualizaciones.buscarMaridaje(actualizacion.get('maridaje')) and GestorImportarActualizaciones.buscarTipoUva(actualizacion.get('varietal').get('tipoUva'))):
+                    Bodega.crearVino(actualizacion)
+                    print("Vino creado")
+
             
 
             # print(Bodega.actualizarDatosVino(actualizacion, vinos))
@@ -58,14 +60,21 @@ class GestorImportarActualizaciones:
         # return vinosImportados
 
     
-    def buscarMaridaje(self):
-        return
+    def buscarMaridaje(mar):
+        maridajes = Maridaje.objects.all()
+
+        for maridaje in maridajes:
+            if maridaje.esMaridaje(mar):
+                return True
+        return False
     
-    def buscarTipoUva(self):
-        return
-    
-    def crearVinos(self):
-        return
+    def buscarTipoUva(tipo):
+        tiposUva = TipoUva.objects.all()
+
+        for tipoUva in tiposUva:
+            if tipoUva.esTipoUva(tipo):
+                return True
+        return False
     
     def buscarSeguidoresDeBodega(self):
         return
