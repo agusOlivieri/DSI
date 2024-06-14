@@ -26,17 +26,27 @@ class Bodega(models.Model):
         # Comparar la próxima fecha de actualización con la fecha actual, si la fecha actual es mayor o igual a la proxima actualizacion retorna true
         return now_aware >= proximaActualizacion
     
-    def actualizarDatosVino(self, nombre, añada, precio, nota_de_cata, imagen_etiqueta):
-        vinos = Vino.objects.all()  # Obtener todos los vinos que apuntan a esta bodega para buscar el que tenemos
-        for vino in vinos:
-            if vino.esVinoParaActualizar(nombre, añada) and (vino.bodega == self.id):
-                vino.setPrecio(precio)
-                vino.setNotaCata(nota_de_cata)
-                vino.setImagenEtiqueta(imagen_etiqueta)
-                vino.save() # Guardamos el vino actualizado
-                return True
-            else: 
-                return False # No se encontro el vino para actualizar
+    def esVinoParaActualizar(actualizacion, bod):
+        nom = actualizacion.get('nombre')
+        
+        if (list(Vino.objects.filter(nombre=nom).filter(bodega=bod)) != []):
+            print(Vino.objects.filter(nombre=nom, bodega=bod))
+            return True
+        return False
+
+    def actualizarDatosVino(actualizacion):
+        nom = actualizacion.get('nombre')
+        notaDeCata = actualizacion.get('NotaDeCata')
+        precio = actualizacion.get('precioARS')
+        imagen = actualizacion.get('ImagenEtiqueta')
+
+        vino = Vino.objects.get(nombre=nom)
+
+        vino.setPrecio(precio)
+        vino.setNotaCata(notaDeCata)
+        vino.setImagenEtiqueta(imagen)
+        vino.save() # Guardamos el vino actualizado
+
         
 
 class TipoUva(models.Model):
@@ -93,12 +103,11 @@ class Vino(models.Model):
         vino.maridaje = maridaje
         vino.varietal = varietal
         vino.bodega = bodega
-
         vino.save()     
-
-        
-    def esVinoParaActualizar(self, añada, nombre):
-        if (self.añada == añada and self.nombre == nombre):
+ 
+    def esVinoParaActualizar(nom, vino):
+        print(vino.nombre)
+        if vino.nombre == nom:
             return True
         return False
     

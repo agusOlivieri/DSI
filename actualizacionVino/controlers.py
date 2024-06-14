@@ -27,7 +27,8 @@ class GestorImportarActualizaciones:
     def tomarSeleccionBodega(nom):
         bodegaSeleccionada = Bodega.objects.get(nombre = nom).getNombre()
         actualizaciones = GestorImportarActualizaciones.obtenerActualizacionVinosBodega(bodegaSeleccionada)
-        return actualizaciones
+        return GestorImportarActualizaciones.actualizarOCrearVino(actualizaciones, bodegaSeleccionada)
+        
     
     def obtenerActualizacionVinosBodega(bodega):
         actualizaciones = InterfazApiBodegas.obtenerActualizacionVinos(bodega)
@@ -37,8 +38,25 @@ class GestorImportarActualizaciones:
            
         return data
 
-    def actualizarVinoExistente(self):
-        return
+    def actualizarOCrearVino(actualizaciones, bodegaSeleccionada):
+        vinosImportados = []
+        bod = Bodega.objects.get(nombre=bodegaSeleccionada)
+
+        for actualizacion in actualizaciones:
+            if Bodega.esVinoParaActualizar(actualizacion, bod): # <- por cada actualizacion valida si el vino existe, si es así, lo actualiza, si no, lo crea.
+                Bodega.actualizarDatosVino(actualizacion)
+                print("vino actualizado", actualizacion.get('nombre'))
+            else: # <- creamos el vino
+                # primero validamos que existan el maridaje y el tipo de uva en nuestra BD
+                # if (GestorImportarActualizaciones.buscarMaridaje() and GestorImportarActualizaciones.buscarTipoUva()):
+                print("to do")
+            
+
+            # print(Bodega.actualizarDatosVino(actualizacion, vinos))
+
+        # vinosImportados = Vino.objects.filter(bodega=bodegaSeleccionada.id)
+        # return vinosImportados
+
     
     def buscarMaridaje(self):
         return

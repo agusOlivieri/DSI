@@ -22,9 +22,6 @@ class PantallaImportarActualizaciones:
     
     def tomarSeleccionBodega(request, nombre):
         actualizaciones = GestorImportarActualizaciones.tomarSeleccionBodega(nombre)
-        print("-----")
-        print(actualizaciones)
-        print("-----")
         return JsonResponse(actualizaciones, safe=False)
         
         # return PantallaImportarActualizaciones.mostrarResumenVinosImportados
