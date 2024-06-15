@@ -26,41 +26,21 @@ class Bodega(models.Model):
         # Comparar la próxima fecha de actualización con la fecha actual, si la fecha actual es mayor o igual a la proxima actualizacion retorna true
         return now_aware >= proximaActualizacion
     
-    def esVinoParaActualizar(actualizacion, bod):
-        nom = actualizacion.get('nombre')
-        
-        if (list(Vino.objects.filter(nombre=nom).filter(bodega=bod)) != []):
-            print(Vino.objects.filter(nombre=nom, bodega=bod))
-            return True
-        return False
+    def esVinoParaActualizar(self, nom):
+        vinos_de_bodega = self.vinos.all() # accedemos a los vinos asociados a esta bodega usando el related_name 'vinos'
+        for vino in vinos_de_bodega:
+            if vino.esVinoParaActualizar(nom):
+                return vino
 
-    def actualizarDatosVino(actualizacion):
-        nom = actualizacion.get('nombre')
-        imagen = actualizacion.get('ImagenEtiqueta')
-        notaDeCata = actualizacion.get('NotaDeCata')
-        precio = actualizacion.get('precioARS')
-
-        vino = Vino.objects.get(nombre=nom)
-
+    def actualizarDatosVino(self, vino, imagen, notaDeCata, precio):
         vino.setPrecio(precio)
         vino.setNotaCata(notaDeCata)
         vino.setImagenEtiqueta(imagen)
-        vino.save() # Guardamos el vino actualizado
+        vino.save()
+        return vino
 
-    def crearVino(actualizacion):
-        nom = actualizacion.get('nombre')
-        añada = actualizacion.get("añada")
-        imagen = actualizacion.get('ImagenEtiqueta')
-        notaDeCata = actualizacion.get('NotaDeCata')
-        precio = actualizacion.get('precioARS')
-        bod = actualizacion.get('bodega')
-        mar = actualizacion.get('maridaje')
-
-        descVarietal = actualizacion.get('varietal').get('descripcion')
-        porcentajeComp = actualizacion.get('varietal').get('PorcentajeComposicion')
-        tipoUva = actualizacion.get('varietal').get('tipoUva')
-        
-        Vino.newVino(añada, imagen, nom, precio, notaDeCata, mar, bod, descVarietal, porcentajeComp, tipoUva)
+    def crearVino(self, nom, añada, imagen, notaDeCata, precio, maridaje, descVarietal, porcentajeComp, tipoUva):
+        return Vino.newVino(añada, imagen, nom, precio, notaDeCata, maridaje, self, descVarietal, porcentajeComp, tipoUva)
 
 class TipoUva(models.Model):
     nombre = models.CharField(max_length=50)
@@ -82,7 +62,6 @@ class Varietal(models.Model):
     tipoUva = models.ForeignKey(TipoUva, on_delete=models.CASCADE)
 
     def newVarietal(desc, porcentaje, tipo):
-        print(desc)
         varietal = Varietal(descripcion=desc, porcentajeComposicion=porcentaje, tipoUva=tipo)
         varietal.save()
         return varietal
@@ -95,26 +74,21 @@ class Vino(models.Model):
     precioARS = models.IntegerField()
     maridaje = models.ForeignKey(Maridaje, on_delete=models.CASCADE)
     varietal = models.ForeignKey(Varietal, on_delete=models.CASCADE)
-    bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE)
+    bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE, related_name='vinos') #related_name usado para acceder a los vinos relacionados a una bodega
    
     class Meta:
         unique_together = ('nombre', 'añada')  # Definir una restricción de unicidad para el nombre y la añada (pk)
 
-    def newVino(aña, imagen, nom, precio,notaDeCata, maridajeId, bodegaId, descVarietal, porcentajeComp, tipoUva):
-        tu = TipoUva.objects.get(id=tipoUva) #<- tipo uva 
+    def newVino(aña, imagen, nom, precio,notaDeCata, maridaje, bodega, descVarietal, porcentajeComp, tipoUva):
         
-        nuevoVarietal = Vino.crearVarietal(descVarietal, porcentajeComp, tu)
-        bod = Bodega.objects.get(id=bodegaId)
-        mar = Maridaje.objects.get(id=maridajeId)
+        nuevoVarietal = Vino.crearVarietal(descVarietal, porcentajeComp, tipoUva)
 
-        vino = Vino(nombre=nom, añada=aña, imagenEtiqueta=imagen, notaDeCataBodega=notaDeCata, precioARS=precio, maridaje=mar, varietal=nuevoVarietal, bodega=bod)
-        vino.save()     
+        vino = Vino(nombre=nom, añada=aña, imagenEtiqueta=imagen, notaDeCataBodega=notaDeCata, precioARS=precio, maridaje=maridaje, varietal=nuevoVarietal, bodega=bodega)
+        vino.save()
+        return vino  
  
-    def esVinoParaActualizar(nom, vino):
-        print(vino.nombre)
-        if vino.nombre == nom:
-            return True
-        return False
+    def esVinoParaActualizar(self, nom):
+        return self.nombre == nom
     
     def setPrecio(self, precio):
         self.precioARS = precio

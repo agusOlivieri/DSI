@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from .interfaces import *
 from .models import *
+#from .views import PantallaImportarActualizaciones
 import json
 
 class GestorImportarActualizaciones:
@@ -25,56 +26,80 @@ class GestorImportarActualizaciones:
         return listaBodegasParaActualizar
     
     def tomarSeleccionBodega(nom):
-        bodegaSeleccionada = Bodega.objects.get(nombre = nom).getNombre()
+        bodegaSeleccionada = Bodega.objects.get(nombre = nom)
         actualizaciones = GestorImportarActualizaciones.obtenerActualizacionVinosBodega(bodegaSeleccionada)
-        return GestorImportarActualizaciones.actualizarOCrearVino(actualizaciones, bodegaSeleccionada)
+        return GestorImportarActualizaciones.actualizarOCrearVinos(actualizaciones, bodegaSeleccionada)
         
     
-    def obtenerActualizacionVinosBodega(bodega):
-        actualizaciones = InterfazApiBodegas.obtenerActualizacionVinos(bodega)
+    def obtenerActualizacionVinosBodega(bodegaSeleccionada):
+        nombreBodega = bodegaSeleccionada.nombre
+        actualizaciones = InterfazApiBodegas.obtenerActualizacionVinos(nombreBodega)
         
         with open(actualizaciones, encoding='utf-8') as file:
             data = json.load(file)
            
         return data
 
-    def actualizarOCrearVino(actualizaciones, bodegaSeleccionada):
+    def actualizarOCrearVinos(actualizaciones, bod):
         vinosImportados = []
-        bod = Bodega.objects.get(nombre=bodegaSeleccionada)
         print(bod.nombre)
         for actualizacion in actualizaciones:
-            if Bodega.esVinoParaActualizar(actualizacion, bod): # <- por cada actualizacion valida si el vino existe, si es así, lo actualiza, si no, lo crea.
-                Bodega.actualizarDatosVino(actualizacion)
+            vinoParaActualizar = bod.esVinoParaActualizar(actualizacion.get('nombre'))
+            if vinoParaActualizar != None: # <- por cada actualizacion valida si el vino existe, si es así, lo actualiza, si no, lo crea.
+                imagen = actualizacion.get('ImagenEtiqueta')
+                notaDeCata = actualizacion.get('NotaDeCata')
+                precio = actualizacion.get('precioARS')
+                vino = bod.actualizarDatosVino(vinoParaActualizar, imagen, notaDeCata, precio)
+                vinosImportados.append(vino)
                 print("vino actualizado", actualizacion.get('nombre'))
             else: # <- creamos el vino
-                # primero validamos que existan el maridaje y el tipo de uva en nuestra BD
-                if (GestorImportarActualizaciones.buscarMaridaje(actualizacion.get('maridaje')) and GestorImportarActualizaciones.buscarTipoUva(actualizacion.get('varietal').get('tipoUva'))):
-                    Bodega.crearVino(actualizacion)
+                # primero buscamos el maridaje y el tipo de uva en nuestra BD
+                maridaje = GestorImportarActualizaciones.buscarMaridaje(actualizacion.get('maridaje'))
+                tipoUva = GestorImportarActualizaciones.buscarTipoUva(actualizacion.get('varietal').get('tipoUva'))
+                if (maridaje != None and tipoUva != None):
+                    nom = actualizacion.get('nombre')
+                    añada = actualizacion.get("añada")
+                    imagen = actualizacion.get('ImagenEtiqueta')
+                    notaDeCata = actualizacion.get('NotaDeCata')
+                    precio = actualizacion.get('precioARS')
+
+                    descVarietal = actualizacion.get('varietal').get('descripcion')
+                    porcentajeComp = actualizacion.get('varietal').get('PorcentajeComposicion')
+
+                    vino = bod.crearVino(nom, añada, imagen, notaDeCata, precio, maridaje, descVarietal, porcentajeComp, tipoUva)
+                    vinosImportados.append(vino)
                     print("Vino creado")
 
-            
+        if vinosImportados != []:
+            resumenVinosImportados = []
+            for vino in vinosImportados:
+                resumenVinosImportados.append({
+                    'nombre':vino.nombre,
+                    'añada':vino.añada,
+                    'precio':vino.precioARS,
+                    'imagenEtiqueta':vino.imagenEtiqueta
+                })
+            print(resumenVinosImportados)
 
-            # print(Bodega.actualizarDatosVino(actualizacion, vinos))
+#            PantallaImportarActualizaciones.mostrarResumenVinosImportados(resumenVinosImportados)
 
-        # vinosImportados = Vino.objects.filter(bodega=bodegaSeleccionada.id)
-        # return vinosImportados
-
+        
     
     def buscarMaridaje(mar):
         maridajes = Maridaje.objects.all()
 
         for maridaje in maridajes:
             if maridaje.esMaridaje(mar):
-                return True
-        return False
+                return maridaje
+        return None
     
     def buscarTipoUva(tipo):
         tiposUva = TipoUva.objects.all()
 
         for tipoUva in tiposUva:
             if tipoUva.esTipoUva(tipo):
-                return True
-        return False
+                return tipoUva
+        return None
     
     def buscarSeguidoresDeBodega(self):
         return
