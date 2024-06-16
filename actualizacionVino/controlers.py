@@ -28,24 +28,26 @@ class GestorImportarActualizaciones:
     def tomarSeleccionBodega(nom):
         bodegaSeleccionada = Bodega.objects.get(nombre = nom)
         actualizaciones = GestorImportarActualizaciones.obtenerActualizacionVinosBodega(bodegaSeleccionada)
+
         return GestorImportarActualizaciones.actualizarOCrearVinos(actualizaciones, bodegaSeleccionada)
         
     
     def obtenerActualizacionVinosBodega(bodegaSeleccionada):
         nombreBodega = bodegaSeleccionada.nombre
         actualizaciones = InterfazApiBodegas.obtenerActualizacionVinos(nombreBodega)
-        
         with open(actualizaciones, encoding='utf-8') as file:
             data = json.load(file)
-           
+
         return data
 
     def actualizarOCrearVinos(actualizaciones, bod):
         vinosImportados = []
-        print(bod.nombre)
+
         for actualizacion in actualizaciones:
+
             vinoParaActualizar = bod.esVinoParaActualizar(actualizacion.get('nombre'))
-            if vinoParaActualizar != None: # <- por cada actualizacion valida si el vino existe, si es así, lo actualiza, si no, lo crea.
+
+            if vinoParaActualizar != None: # <- por cada actualizacion valida si el vino existe, lo actualiza, si no, lo crea.
                 imagen = actualizacion.get('ImagenEtiqueta')
                 notaDeCata = actualizacion.get('NotaDeCata')
                 precio = actualizacion.get('precioARS')
@@ -79,7 +81,7 @@ class GestorImportarActualizaciones:
                     'precio':vino.precioARS,
                     'imagenEtiqueta':vino.imagenEtiqueta
                 })
-            print(resumenVinosImportados)
+            return resumenVinosImportados
 
 #            PantallaImportarActualizaciones.mostrarResumenVinosImportados(resumenVinosImportados)
 

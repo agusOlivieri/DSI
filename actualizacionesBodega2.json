@@ -1,16 +1,16 @@
 [
     {
-        "nombre": "Vino Blanco del Sol",
+        "nombre": "Vino Rubio del Sol",
         "añada": 2018,
         "ImagenEtiqueta": "imagenNueva2",
         "NotaDeCata": "Aromas cítricos y florales",
         "precioARS": 28000,
-        "bodega": 2,
-        "maridaje": 1,
+        "bodega": 3,
+        "maridaje": 2,
         "varietal": {
             "descripcion": "Vino fresco con toques de manzana verde y pera.",
             "PorcentajeComposicion": 90,
-            "tipoUva": "Chardonnay"
+            "tipoUva": 8
         }
     },
     {
@@ -19,12 +19,12 @@
         "ImagenEtiqueta": "imagenNueva5",
         "NotaDeCata": "Cuerpo completo con notas de cereza y roble.",
         "precioARS": 32000,
-        "bodega": 2,
+        "bodega": 3,
         "maridaje": 2,
         "varietal": {
             "descripcion": "Vino con taninos suaves y final prolongado.",
             "PorcentajeComposicion": 88,
-            "tipoUva": "Merlot"
+            "tipoUva": 2
         }
     },
     {
@@ -33,12 +33,12 @@
         "ImagenEtiqueta": "imagenNueva8",
         "NotaDeCata": "Fresco con toques de cítricos.",
         "precioARS": 26000,
-        "bodega": 2,
+        "bodega": 3,
         "maridaje": 2,
         "varietal": {
             "descripcion": "Vino rosado brillante y aromático.",
             "PorcentajeComposicion": 93,
-            "tipoUva": "Grenache"
+            "tipoUva": 17
         }
     }
 ]

@@ -31,6 +31,9 @@ class Bodega(models.Model):
         for vino in vinos_de_bodega:
             if vino.esVinoParaActualizar(nom):
                 return vino
+            else:
+                continue
+        return None
 
     def actualizarDatosVino(self, vino, imagen, notaDeCata, precio):
         vino.setPrecio(precio)
