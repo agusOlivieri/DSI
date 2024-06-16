@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static '/styles/vinosImportados.css' %}">
+</head>
+<body>
+    <main>
+        <h1 class="titles" style="color: rgb(174, 43, 69);">Lista de Vinos Importados</h1>
+        <h2 class="titles" style="font-size: 1.8em; margin-top: 0;">{{ bodega }}</h2>
+        
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Nota de Cata</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for actualizacion in actualizaciones %}
+                <tr>
+                    <td>{{ actualizacion.nombre }}</td>
+                    <td>{{ actualizacion.precio }}</td>
+                    <td>{{ actualizacion.imagenEtiqueta }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="bottom">
+            <div class="notif-container">
+                <p class="notif">{{ notificacion }}</p>
+            </div>
+            <div class="btn-container">
+                <a class="btn-vuelta" href="/actualizar">Seguir actualizando</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

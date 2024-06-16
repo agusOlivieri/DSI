@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 
 from .models import *
 from .controlers import GestorImportarActualizaciones
+
 import json
 # Create your views here.
 
@@ -12,8 +13,8 @@ class PantallaImportarActualizaciones:
         return PantallaImportarActualizaciones.habilitar(request)
 
     def habilitar(request):
-        listaBodegasParaActualizar = GestorImportarActualizaciones.opImportarActualizacionVinos()
-        return PantallaImportarActualizaciones.mostrarBodegasParaActualizar(request, listaBodegasParaActualizar)
+        return GestorImportarActualizaciones.opImportarActualizacionVinos(request)
+        # return PantallaImportarActualizaciones.mostrarBodegasParaActualizar(request, listaBodegasParaActualizar)
   
     def mostrarBodegasParaActualizar(request, bodegasParaActualizar):
         return render(request, 'bodegas_para_actualizar.html', {
@@ -21,15 +22,20 @@ class PantallaImportarActualizaciones:
         })
     
     def tomarSeleccionBodega(request, nombre):
-        actualizaciones = GestorImportarActualizaciones.tomarSeleccionBodega(nombre)
-        return JsonResponse(actualizaciones, safe=False)
+        return GestorImportarActualizaciones.tomarSeleccionBodega(request, nombre)
         
-        # return PantallaImportarActualizaciones.mostrarResumenVinosImportados
+        # return PantallaImportarActualizaciones.mostrarResumenVinosImportados(request, actualizaciones, nombre)
         
 
-    def mostrarResumenVinosImportados(self):
-        return
+    def mostrarResumenVinosImportados(request, actualizaciones, nombreBod, notif):
+        return render(request, 'vinos_importados.html', {
+            'actualizaciones': actualizaciones,
+            'bodega': nombreBod,
+            'notificacion': notif
+        })
 
+    def mostrarConfirmacionDeNotificacion(request, confirmacion):
+        return render(request, )
 
 def index(request): 
     return render(request, 'index.html')

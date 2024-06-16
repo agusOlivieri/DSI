@@ -2,7 +2,8 @@ from django.shortcuts import render
 
 from .interfaces import *
 from .models import *
-#from .views import PantallaImportarActualizaciones
+
+
 import json
 
 class GestorImportarActualizaciones:
@@ -12,9 +13,11 @@ class GestorImportarActualizaciones:
     listaSeguidoresDeBodega = []
     datosActualizacionVinos = None
 
-    def opImportarActualizacionVinos():
+    def opImportarActualizacionVinos(request):
+        from .views import PantallaImportarActualizaciones
+
         listaBodegasParaActualizar = GestorImportarActualizaciones.buscarBodegasParaActualizar()
-        return listaBodegasParaActualizar
+        return PantallaImportarActualizaciones.mostrarBodegasParaActualizar(request, listaBodegasParaActualizar)
     
     def buscarBodegasParaActualizar():
         listaBodegasParaActualizar = []
@@ -25,13 +28,19 @@ class GestorImportarActualizaciones:
                 listaBodegasParaActualizar.append(nombre)
         return listaBodegasParaActualizar
     
-    def tomarSeleccionBodega(nom):
+    def tomarSeleccionBodega(request, nom):
+        from .views import PantallaImportarActualizaciones
+
+        # Actualizar vinos:
         bodegaSeleccionada = Bodega.objects.get(nombre = nom)
         actualizaciones = GestorImportarActualizaciones.obtenerActualizacionVinosBodega(bodegaSeleccionada)
+        vinosImportados = GestorImportarActualizaciones.actualizarOCrearVinos(actualizaciones, bodegaSeleccionada)
 
-        return GestorImportarActualizaciones.actualizarOCrearVinos(actualizaciones, bodegaSeleccionada)
+        # Notificación:
+        notificacion = GestorImportarActualizaciones.notificarEnofilosSeguidores(bodegaSeleccionada)
+
+        return PantallaImportarActualizaciones.mostrarResumenVinosImportados(request, vinosImportados, nom, notificacion)
         
-    
     def obtenerActualizacionVinosBodega(bodegaSeleccionada):
         nombreBodega = bodegaSeleccionada.nombre
         actualizaciones = InterfazApiBodegas.obtenerActualizacionVinos(nombreBodega)
@@ -81,11 +90,9 @@ class GestorImportarActualizaciones:
                     'precio':vino.precioARS,
                     'imagenEtiqueta':vino.imagenEtiqueta
                 })
-            return resumenVinosImportados
-
-#            PantallaImportarActualizaciones.mostrarResumenVinosImportados(resumenVinosImportados)
-
-        
+            
+            bod.actualizarUltimaFecha() # <-- actualizamos la fecha de ultima actualizacion 
+            return resumenVinosImportados        
     
     def buscarMaridaje(mar):
         maridajes = Maridaje.objects.all()
@@ -102,9 +109,25 @@ class GestorImportarActualizaciones:
             if tipoUva.esTipoUva(tipo):
                 return tipoUva
         return None
-    
-    def buscarSeguidoresDeBodega(self):
-        return
+
+    def notificarEnofilosSeguidores(bodega):
+        seguidores = GestorImportarActualizaciones.buscarSeguidoresDeBodega(bodega)
+        print("-----")
+        print(seguidores, "sigue a bodega")
+        print("-----")
+        return InterfazNotificacionPush.notificarNovedadVinoParaBodega(seguidores)
+
+    def buscarSeguidoresDeBodega(bodega):
+        enofilos = Enofilo.objects.all()  # <-- recuperamos todos los enofilos
+
+        enofilosSeguidores = []
+        for enofilo in enofilos:  # <-- recorremos todos los enofilos para saber si sigue a la bodega seleccionada
+            if enofilo.seguisABodega(bodega.id): # <-- tomamos nombre de usuario y verificamos si sigue a la bodega
+                enofilosSeguidores.append(enofilo) # <-- si es asi, lo agregamos a una lista de enofilos seguidores
+            else:
+                continue
+
+        return enofilosSeguidores
     
     def finCU(self):
         return

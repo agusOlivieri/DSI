@@ -46,9 +46,9 @@ class InterfazNotificacionPush:
         #no implementado
         return notificado
 
-    def notificarNovedadVinoParaBodega(self, enofilos):
+    def notificarNovedadVinoParaBodega(enofilos):
 
         for enofilo in enofilos:
-            self.notificarEnofilo(enofilo)
+            InterfazNotificacionPush.notificarEnofilo(enofilo)
 
-        return ('Enofilos notificados con éxito.')
+        return ('Los enofilos seguidores de esta bodega fueron notificados de las novedades con exito!')

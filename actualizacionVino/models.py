@@ -35,6 +35,10 @@ class Bodega(models.Model):
                 continue
         return None
 
+    def actualizarUltimaFecha(self):
+        self.ultimaActualizacion = datetime.now(timezone.utc)
+        self.save()
+
     def actualizarDatosVino(self, vino, imagen, notaDeCata, precio):
         vino.setPrecio(precio)
         vino.setNotaCata(notaDeCata)
@@ -121,8 +125,8 @@ class Siguiendo(models.Model):
     fechaInicio = models.DateField()
     bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE)
 
-    def sosDeBodega(self, nombreBodega):
-        return (self.bodega.nombre == nombreBodega)
+    def sosDeBodega(self, bod):
+        return (self.bodega.id == bod)
 
 class Enofilo(models.Model):
     nombre = models.CharField(max_length=30)
@@ -135,7 +139,8 @@ class Enofilo(models.Model):
     def getNombreUsuario(self):
         return self.usuario.getNombre()
 
-    def seguisABodega(self, nombreBodega):
-        return self.siguiendo.sosDeBodega(nombreBodega)
+    def seguisABodega(self, bodega):
+        print(self.siguiendo.bodega.id)
+        return self.siguiendo.sosDeBodega(bodega)
     
 
