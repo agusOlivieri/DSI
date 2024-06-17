@@ -37,7 +37,7 @@ class GestorImportarActualizaciones:
         vinosImportados = GestorImportarActualizaciones.actualizarOCrearVinos(actualizaciones, bodegaSeleccionada)
 
         # Notificación:
-        notificacion = GestorImportarActualizaciones.notificarEnofilosSeguidores(bodegaSeleccionada)
+        notificacion = GestorImportarActualizaciones.notificarusuariosSeguidores(bodegaSeleccionada)
 
         return PantallaImportarActualizaciones.mostrarResumenVinosImportados(request, vinosImportados, nom, notificacion)
         
@@ -110,7 +110,7 @@ class GestorImportarActualizaciones:
                 return tipoUva
         return None
 
-    def notificarEnofilosSeguidores(bodega):
+    def notificarusuariosSeguidores(bodega):
         seguidores = GestorImportarActualizaciones.buscarSeguidoresDeBodega(bodega)
         print("-----")
         print(seguidores, "sigue a bodega")
@@ -120,14 +120,15 @@ class GestorImportarActualizaciones:
     def buscarSeguidoresDeBodega(bodega):
         enofilos = Enofilo.objects.all()  # <-- recuperamos todos los enofilos
 
-        enofilosSeguidores = []
+        usuariosSeguidores = []
         for enofilo in enofilos:  # <-- recorremos todos los enofilos para saber si sigue a la bodega seleccionada
-            if enofilo.seguisABodega(bodega.id): # <-- tomamos nombre de usuario y verificamos si sigue a la bodega
-                enofilosSeguidores.append(enofilo) # <-- si es asi, lo agregamos a una lista de enofilos seguidores
+            if enofilo.seguisABodega(bodega.id):# <-- tomamos nombre de usuario y verificamos si sigue a la bodega
+                nombreUsuario = enofilo.getNombreUsuario()
+                usuariosSeguidores.append(nombreUsuario) # <-- si es asi, obtenemos el nombre de usuario y lo agregamos a la lista
             else:
                 continue
 
-        return enofilosSeguidores
+        return usuariosSeguidores
     
     def finCU(self):
         return
