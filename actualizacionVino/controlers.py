@@ -37,7 +37,7 @@ class GestorImportarActualizaciones:
         vinosImportados = GestorImportarActualizaciones.actualizarOCrearVinos(actualizaciones, bodegaSeleccionada)
 
         # Notificación:
-        notificacion = GestorImportarActualizaciones.notificarusuariosSeguidores(bodegaSeleccionada)
+        notificacion = GestorImportarActualizaciones.notificarUsuariosSeguidores(bodegaSeleccionada)
 
         return PantallaImportarActualizaciones.mostrarResumenVinosImportados(request, vinosImportados, nom, notificacion)
         
@@ -110,7 +110,7 @@ class GestorImportarActualizaciones:
                 return tipoUva
         return None
 
-    def notificarusuariosSeguidores(bodega):
+    def notificarUsuariosSeguidores(bodega):
         seguidores = GestorImportarActualizaciones.buscarSeguidoresDeBodega(bodega)
         print("-----")
         print(seguidores, "sigue a bodega")
