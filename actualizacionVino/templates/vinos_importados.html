@@ -22,11 +22,11 @@
                 </tr>
             </thead>
             <tbody>
-                {% for actualizacion in actualizaciones %}
+                {% for vinoImp in vinosImportados %}
                 <tr>
-                    <td>{{ actualizacion.nombre }}</td>
-                    <td>{{ actualizacion.precio }}</td>
-                    <td>{{ actualizacion.imagenEtiqueta }}</td>
+                    <td>{{ vinoImp.nombre }}</td>
+                    <td>{{ vinoImp.precio }}</td>
+                    <td>{{ vinoImp.imagenEtiqueta }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
