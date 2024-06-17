@@ -19,14 +19,15 @@ class PantallaImportarActualizaciones:
             'bodegas': bodegasParaActualizar
         })
     
-    def tomarSeleccionBodega(request, nombre):
-        return GestorImportarActualizaciones.tomarSeleccionBodega(request, nombre)
+    def tomarSeleccionBodega(request, nombreBodega):
+        return GestorImportarActualizaciones.tomarSeleccionBodega(request, nombreBodega)
         
         # return PantallaImportarActualizaciones.mostrarResumenVinosImportados(request, actualizaciones, nombre)
         
-    def mostrarResumenVinosImportados(request, actualizaciones, nombreBod, notif):
+
+    def mostrarResumenVinosImportados(request, vinosImportados, nombreBod, notif):
         return render(request, 'vinos_importados.html', {
-            'actualizaciones': actualizaciones,
+            'vinosImportados': vinosImportados,
             'bodega': nombreBod,
             'notificacion': notif
         })
@@ -36,4 +37,3 @@ class PantallaImportarActualizaciones:
 
 def index(request): 
     return render(request, 'index.html')
-

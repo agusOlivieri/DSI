@@ -140,7 +140,6 @@ class Enofilo(models.Model):
         return self.usuario.getNombre()
 
     def seguisABodega(self, bodega):
-        print(self.siguiendo.bodega.id)
         return self.siguiendo.sosDeBodega(bodega)
     
 
