@@ -1,8 +1,5 @@
-from django.shortcuts import render
-
 from .interfaces import *
 from .models import *
-
 
 import json
 
@@ -112,9 +109,7 @@ class GestorImportarActualizaciones:
 
     def notificarEnofilosSeguidores(bodega):
         seguidores = GestorImportarActualizaciones.buscarSeguidoresDeBodega(bodega)
-        print("-----")
-        print(seguidores, "sigue a bodega")
-        print("-----")
+
         return InterfazNotificacionPush.notificarNovedadVinoParaBodega(seguidores)
 
     def buscarSeguidoresDeBodega(bodega):
@@ -123,7 +118,7 @@ class GestorImportarActualizaciones:
         enofilosSeguidores = []
         for enofilo in enofilos:  # <-- recorremos todos los enofilos para saber si sigue a la bodega seleccionada
             if enofilo.seguisABodega(bodega.id): # <-- tomamos nombre de usuario y verificamos si sigue a la bodega
-                enofilosSeguidores.append(enofilo) # <-- si es asi, lo agregamos a una lista de enofilos seguidores
+                enofilosSeguidores.append(enofilo.usuario.nombre) # <-- si es asi, lo agregamos a una lista de enofilos seguidores
             else:
                 continue
 
