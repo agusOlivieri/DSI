@@ -7,11 +7,6 @@ from .models import *
 import json
 
 class GestorImportarActualizaciones:
-    seleccionBodega = None
-    tipoUva = None
-    maridaje = None
-    listaSeguidoresDeBodega = []
-    datosActualizacionVinos = None
 
     def opImportarActualizacionVinos(request):
         from .views import PantallaImportarActualizaciones
