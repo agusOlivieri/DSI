@@ -37,7 +37,7 @@ class GestorImportarActualizaciones:
         notificacion = GestorImportarActualizaciones.notificarUsuariosSeguidores(bodegaSeleccionada)
 
         GestorImportarActualizaciones.finCU()
-        
+
         return PantallaImportarActualizaciones.mostrarResumenVinosImportados(request, vinosImportados, nom, notificacion)
         
     def obtenerActualizacionVinosBodega(bodegaSeleccionada):
@@ -112,7 +112,10 @@ class GestorImportarActualizaciones:
     def notificarUsuariosSeguidores(bodega):
         seguidores = GestorImportarActualizaciones.buscarSeguidoresDeBodega(bodega)
 
-        return InterfazNotificacionPush.notificarNovedadVinoParaBodega(seguidores)
+        if seguidores != []:
+            return InterfazNotificacionPush.notificarNovedadVinoParaBodega(seguidores)
+
+        return "No es existen usuarios seguidores a esta bodega"
 
     def buscarSeguidoresDeBodega(bodega):
         enofilos = Enofilo.objects.all()  # <-- recuperamos todos los enofilos
@@ -127,5 +130,5 @@ class GestorImportarActualizaciones:
 
         return usuariosSeguidores
     
-    def finCU(self):
+    def finCU():
         return
